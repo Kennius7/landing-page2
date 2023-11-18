@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { mainContext } from "./context/mainContext";
 import Home from "./components/Home";
 import Intro from "./components/Intro";
-import { mainContext } from "./context/mainContext";
+import BulletPoints from "./components/BulletPoints";
+import CallToAction from "./components/CallToAction";
 
 
 
@@ -47,6 +49,8 @@ function App() {
       <mainContext.Provider value={{ hours, minutes, seconds, days}}>
         <Home />
         <Intro />
+        <BulletPoints />
+        <CallToAction />
       </mainContext.Provider>
     </>
   )
