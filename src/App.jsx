@@ -8,7 +8,7 @@ import CallToAction from "./components/CallToAction";
 
 
 function App() {
-  const timeVariable1 = + new Date("01/31/2024 09:00:00");
+  const timeVariable1 = new Date("01/31/2024 09:00:00");
   const timeVariable2 = new Date;
   const timeTodayCounted = timeVariable2.valueOf();
   const futureCounted = timeVariable1.valueOf();
