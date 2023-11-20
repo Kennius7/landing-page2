@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { mainContext } from "./context/mainContext";
-import Home from "./components/Home";
-import Intro from "./components/Intro";
-import BulletPoints from "./components/BulletPoints";
-import CallToAction from "./components/CallToAction";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
+import Register from "./components/Register";
+import ScrollToTop from "./ScrollToTop";
 
 
 
@@ -47,10 +47,13 @@ function App() {
   return (
     <>
       <mainContext.Provider value={{ hours, minutes, seconds, days}}>
-        <Home />
-        <Intro />
-        <BulletPoints />
-        <CallToAction />
+        <BrowserRouter>
+          <ScrollToTop/>
+          <Routes>
+            <Route path="/" element={ <LandingPage /> } />
+            <Route path="/register" element={ <Register /> } />
+          </Routes>
+        </BrowserRouter>
       </mainContext.Provider>
     </>
   )

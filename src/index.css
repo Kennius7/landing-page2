@@ -82,7 +82,7 @@ button:focus-visible {
 .bg-style {
   position: relative;
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,7 +92,7 @@ button:focus-visible {
 .bg-style::before {
   content: "";
   width: 100%;
-  height: 100dvh;
+  height: 100%;
   background-image: url("/src/assets/bg-png2.png");
   background-size: cover;
   background-repeat: repeat-y;
