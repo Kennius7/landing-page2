@@ -6,7 +6,13 @@ import RegisterHome from "./RegisterHome";
 function Register() {
 
     const [isOpen, setIsOpen] = useState(false);
-    const options = ['Front End Development', 'Mobile App Development', 'Back End Development',];
+    const options = [
+        'Web Design Basics', 
+        'Advanced Web Design', 
+        'Front End Development (React)', 
+        'Back End Development (Node.js)', 
+        'Python Programming Language',
+    ];
     // const [consoleReport, setConsoleReport] = useState("");
     const [formData, setFormData] = useState({
         name: '',

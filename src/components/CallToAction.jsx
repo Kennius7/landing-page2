@@ -1,9 +1,34 @@
 import RegisterButton from "./RegisterButton";
 import backgroundPics from "../assets/home-bg.webp";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
 function CallToAction() {
+    const Navigate = useNavigate();
+    const passwordAdmin = "Shosanboggs7#";
+    const [clicked, setClicked] = useState(false);
+    const [adminPassword, setAdminPassword] = useState("");
+
+    const handleChange = (e) => {
+        setAdminPassword(() => e.target.value);
+    }
+    const handleAdminClick = () => {
+        setClicked(!clicked);
+    }
+
+    const handleSubmit = () => {
+        adminPassword === passwordAdmin 
+            ? Navigate("/dashboard") 
+            : console.log(adminPassword);
+        
+        setClicked(!clicked);
+    }
+
+
+
+
   return (
     <>
         <div className="w-full relative md:h-[800px] sm:h-[600px] xs:h-[550px] h-[500px]">
@@ -31,6 +56,31 @@ function CallToAction() {
                     Don&apos;t miss out on the opportunity to shape your destiny in the digital realm. 
                     Join our online programming classes and unlock the doors to a world of endless opportunities!
                 </div>
+            </div>
+
+            <div className="absolute z-2 bottom-1 right-1 cursor-pointer flex flex-col justify-center items-end">
+                <div 
+                    onClick={handleAdminClick} 
+                    className={`${clicked ? "text-slate-300" : "text-slate-50"}`}>
+                    Admin Login
+                </div>
+                <input 
+                    type="password" 
+                    name="password" 
+                    value={adminPassword}
+                    onChange={handleChange}
+                    placeholder="Password"
+                    className={`border-[1px] border-slate-400 w-[150px] h-[20px] placeholder:text-slate-400
+                    placeholder:text-end placeholder:text-[12px] text-[12px]
+                    ${clicked ? "block" : "hidden"}`}>
+                </input>
+                <button 
+                    onClick={handleSubmit}
+                    className={`border-[1px] border-slate-400 text-end text-slate-400 text-[12px] 
+                    w-[150px] h-[20px] 
+                    ${clicked ? "block" : "hidden"}`}>
+                    Submit
+                </button>
             </div>
         </div>
     </>

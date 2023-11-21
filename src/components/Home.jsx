@@ -17,7 +17,7 @@ const Home = () => {
                 </div>
 
                 <div className="absolute z-1 top-0 left-0 flex flex-col justify-start items-start w-full h-full">
-                    <div className="w-full flex justify-between items-center mb-[80px] sm:p-4 p-1">
+                    <div className="w-full flex justify-between items-center mb-[60px] sm:p-4 p-1">
                         <div className="flex justify-start items-center">
                             <img 
                                 src={logo}
@@ -40,12 +40,19 @@ const Home = () => {
 
                     <div className="w-full flex flex-col justify-center items-center">
                         <div className="w-full flex flex-col justify-center items-center 
-                            sm:mb-[6%] xs:mb-[20%] mb-[30%]">
-                            <div className="font-poppins font-semibold text-center md:text-[40px] 
+                            md:mb-[4%] sm:mb-[6%] xs:mb-[20%] mb-[30%]">
+                            <div className="font-poppins font-semibold text-center md:text-[39px] 
                                 sm:text-[35px] xs:text-[26px] text-[22px] md:max-w-[800px] sm:max-w-[600px] 
-                                xs:max-w-[400px] max-w-[320px] md:tracking-[3px] tracking-normal xs:mb-[3%] 
-                                mb-[12%] xs:leading-normal leading-[27px]">
+                                xs:max-w-[400px] max-w-[320px] md:tracking-[3px] tracking-normal md:mb-[1%] 
+                                xs:mb-[3%] mb-[12%] xs:leading-normal leading-[27px]">
                                 Unlock Your Coding Potential with Our Online Programming Classes 
+                            </div>
+                            <div className="font-poppins font-semibold text-primary text-[20px] 
+                                md:mb-[1%] sm:mb-[6%] xs:mb-[20%] mb-[30%]">
+                                Seize this opportunity with a&nbsp;
+                                <span className="font-poppins font-semibold text-blue-700 text-[28px]">
+                                    70%
+                                </span> discount on all courses!
                             </div>
                             <div className="flex justify-center items-center w-full">
                                 <RegisterButton/>
