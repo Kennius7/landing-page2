@@ -1,18 +1,13 @@
 import { useState } from 'react';
+import { useContext } from "react";
+import { mainContext } from "../context/mainContext";
 import RegisterHome from "./RegisterHome";
 
 
 
 function Register() {
-
+    const { courses } = useContext(mainContext);
     const [isOpen, setIsOpen] = useState(false);
-    const options = [
-        'Web Design Basics', 
-        'Advanced Web Design', 
-        'Front End Development (React)', 
-        'Back End Development (Node.js)', 
-        'Python Programming Language',
-    ];
     // const [consoleReport, setConsoleReport] = useState("");
     const [formData, setFormData] = useState({
         name: '',
@@ -169,15 +164,15 @@ function Register() {
                                 <div className="origin-top-right absolute left-[34%] mt-2 w-56 rounded-md 
                                     shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                                     <div className="py-1">
-                                        {options.map((option) => (
-                                        <div
-                                            key={option}
-                                            onClick={() => handleOptionClick(option)}
-                                            className="block text-start pl-3 px-6 py-3 text-sm text-gray-700 
-                                                hover:bg-blue-500 hover:text-white cursor-pointer"
-                                        >
-                                            {option}
-                                        </div>
+                                        {courses.map((course) => (
+                                            <div
+                                                key={course.id}
+                                                onClick={() => handleOptionClick(course.name)}
+                                                className="block text-start pl-3 px-6 py-3 text-sm text-gray-700 
+                                                    hover:bg-blue-500 hover:text-white cursor-pointer"
+                                            >
+                                                {course.name}
+                                            </div>
                                         ))}
                                     </div>
                                 </div>

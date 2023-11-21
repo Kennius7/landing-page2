@@ -1,16 +1,10 @@
-
+import { useContext } from "react";
+import { mainContext } from "../context/mainContext";
 
 
 
 function CourseList() {
-
-    const courses = [
-        { id: 0, name: 'Web Design Basics', formerPrice: "100,000", price: "30,000", duration: '4 weeks', },
-        { id: 1, name: 'Advanced Web Design', formerPrice: "200,000", price: "40,000", duration: '4 weeks', },
-        { id: 2, name: 'Front End Development (React)', formerPrice: "300,000", price: "50,000", duration: '8 weeks', },
-        { id: 3, name: 'Back End Development (Node.js)', formerPrice: "300,000", price: "50,000", duration: '8 weeks', },
-        { id: 4, name: 'Python Programming Language', formerPrice: "200,000", price: "40,000", duration: '6 weeks', },
-    ];
+    const { courses } = useContext(mainContext);
 
 
     return (
@@ -56,7 +50,7 @@ function CourseList() {
                     </tbody>
                 </table>
                 <div className="flex justify-start items-center mt-[20px] w-[95%] h-[40px]">
-                    <div className="font-sans italic text-start font-semibold w-[80%] text-[16px]">
+                    <div className="font-sans italic text-start font-semibold w-[94%] text-[16px]">
                         <span className="font-bold text-[22px]">*</span>
                         The duration is based on a 6 hour weekly schedule, either during the weekdays 
                         or the weekend. You can freely negotiate a personalized schedule just for you.

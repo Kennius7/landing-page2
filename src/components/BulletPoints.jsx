@@ -1,7 +1,7 @@
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
-import features01 from "../assets/intro-bg.webp";
+import { features01, features02, features03, features04, features05, features06 } from "../assets";
 
 
 
@@ -12,39 +12,39 @@ function BulletPoints() {
   const reasonWhySlide = [
     {
       id: 0,
-      name: "✨ Expert-Led Instruction ✨",
-      title: "Learn from industry professionals with years of hands-on experience. Our instructors are passionate about guiding you through the ins and outs of programming, ensuring you gain real-world insights",
+      name: "Expert Tutoring",
+      title: "Learn from professionals with years of hands-on experience. Our instructors are passionate about guiding you through the ins and outs of programming, ensuring you gain real-world insights",
       img: features01,
     },
     {
       id: 1,
-      name: "🚀 Comprehensive Curriculum 🚀",
+      name: "Comprehensive Curriculum",
       title: "Stay ahead of the curve with a curriculum designed to cover the latest programming languages, frameworks, and industry trends. From Python to JavaScript, we've got you covered",
-      img: features01,
+      img: features02,
     },
     {
       id: 2,
-      name: "🎓 Flexible Learning 🎓",
+      name: "Flexible Learning",
       title: "Life is busy, and we get it! Our online classes are structured to fit your schedule. Learn at your own pace, from the comfort of your home, and access course materials 24/7",
-      img: features01,
+      img: features03,
     },
     {
       id: 3,
-      name: "🔧 Hands-On Projects 🔧",
+      name: "Hands-On Projects",
       title: "Put theory into practice with engaging, hands-on projects that reinforce your learning. Build a portfolio of impressive projects to showcase your skills to future employers",
-      img: features01,
+      img: features04,
     },
     {
       id: 4,
-      name: "🌟 Community Support 🌟",
+      name: "Community Support",
       title: "Join a vibrant community of learners, exchange ideas, and get help when you need it. Our dedicated support team and forums ensure you're never alone on your coding journey",
-      img: features01,
+      img: features05,
     },
     {
       id: 5,
-      name: "🏆 Career Guidance 🏆",
+      name: "Career Guidance",
       title: "Looking to land that dream job in tech? Our courses come with valuable career guidance, including resume reviews, interview tips, and networking opportunities",
-      img: features01,
+      img: features06,
     },
   ];
 
@@ -93,7 +93,7 @@ function BulletPoints() {
             WHY CHOOSE OUR ONLINE PROGRAMMING CLASSES?
           </div>
         </div>
-        <div className="w-full">
+        <div className="w-full bg-slate-700">
           <Splide options={reasonWhySplideOptions}>
             {reasonWhySlide.map((card) => (
               <SplideSlide key={card.id}>
@@ -103,19 +103,19 @@ function BulletPoints() {
                     md:w-[96%] md:h-[96%] sm:w-[86%] sm:h-[86%] xs:w-[80%] xs:h-[80%] 
                     xxs:w-[95%] xxs:h-[95%] w-[80%] h-[80%]">
                     <img src={card.img} alt={card.name}
-                      className="bg-center bg-cover opacity-25 w-full h-full"
+                      className="object-cover opacity-30 w-full h-full"
                     />
                   </div>
 
-                  <div className="flex flex-col justify-center items-center text-primary 
-                    w-full absolute z-1 top-[20%]">
+                  <div className="flex flex-col justify-center items-center text-white 
+                    w-full absolute z-1 top-[25%]">
                     <div className="font-poppins font-semibold text-center md:text-[18px] sm:text-[22px] 
                           xs:text-[18px] xxs:text-[16px] text-[17px] mb-[20px]">
                       {card.name}
                     </div>
                     <div className="font-mono font-semibold text-center md:text-[14px] 
                       sm:text-[16px] xs:text-[14px] xxs:text-[13px] text-[12px] 
-                      text-primary md:w-[90%] sm:w-full xxs:w-[70%] w-[98%]">
+                      text-white md:w-[90%] sm:w-full xxs:w-[70%] w-[98%]">
                       {card.title}
                     </div>
                   </div>
