@@ -11,13 +11,15 @@ const Home = () => {
 
     return (
         <>
-            <div className="w-full relative sm:h-[600px] xs:h-[550px] h-[500px]">
+            <div className="w-full relative sm:h-[600px] xs:h-[500px] h-[400px]">
                 <div className="w-full h-full">
                     <img src={backgroundPics} className="w-full h-full object-cover opacity-40" />
                 </div>
 
                 <div className="absolute z-1 top-0 left-0 flex flex-col justify-start items-start w-full h-full">
-                    <div className="w-full flex justify-between items-center mb-[60px] sm:p-4 p-1">
+
+                    <div className="w-full flex justify-between items-center md:mb-[60px] sm:mb-[30px] 
+                        xs:mb-[40px] mb-[20px] sm:p-4 p-1">
                         <div className="flex justify-start items-center">
                             <img 
                                 src={logo}
@@ -39,24 +41,29 @@ const Home = () => {
                     </div>
 
                     <div className="w-full flex flex-col justify-center items-center">
+
                         <div className="w-full flex flex-col justify-center items-center 
-                            md:mb-[4%] sm:mb-[6%] xs:mb-[20%] mb-[30%]">
+                            md:mb-[4%] sm:mb-[10%] xs:mb-[12%] mb-[13%]">
+
                             <div className="font-poppins font-semibold text-center md:text-[39px] 
-                                sm:text-[35px] xs:text-[26px] text-[22px] md:max-w-[800px] sm:max-w-[600px] 
-                                xs:max-w-[400px] max-w-[320px] md:tracking-[3px] tracking-normal md:mb-[1%] 
-                                xs:mb-[3%] mb-[12%] xs:leading-normal leading-[27px]">
+                                sm:text-[32px] xs:text-[24px] text-[20px] md:max-w-[800px] sm:max-w-[600px] 
+                                xs:max-w-[380px] max-w-[320px] md:tracking-[3px] tracking-normal md:mb-[1%] 
+                                sm:mb-[1%] xs:mb-[3%] mb-[2%] xs:leading-normal leading-[27px]">
                                 Unlock Your Coding Potential with Our Online Programming Classes 
                             </div>
-                            <div className="font-poppins font-semibold text-primary text-[20px] 
-                                md:mb-[1%] sm:mb-[6%] xs:mb-[20%] mb-[30%]">
+                            <div className="font-poppins font-semibold text-primary text-center 
+                                sm:text-[20px] xs:text-[16px] text-[14px] md:mb-[1%] sm:mb-[2%] xs:mb-[3%] 
+                                mb-[4%] xs:w-full w-[82%]">
                                 Seize this opportunity with a&nbsp;
-                                <span className="font-poppins font-semibold text-blue-700 text-[28px]">
+                                <span className="font-poppins font-semibold text-blue-700 
+                                    sm:text-[28px] xs:text-[20px] text-[16px]">
                                     70%
                                 </span> discount on all courses!
                             </div>
-                            <div className="flex justify-center items-center w-full">
+                            <div className="flex justify-center items-center md:w-full sm:w-[80%] w-[96%]">
                                 <RegisterButton/>
                             </div>
+
                         </div>
 
                         <div className="flex justify-center items-center w-[100%]">

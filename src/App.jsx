@@ -15,7 +15,7 @@ function App() {
     { id: 2, name: 'Front End Development (React)', formerPrice: "300,000", price: "45,000", duration: '8 weeks', },
     { id: 3, name: 'Back End Development (Node.js)', formerPrice: "300,000", price: "50,000", duration: '8 weeks', },
     { id: 4, name: 'Mobile App Development (React Native)', formerPrice: "350,000", price: "50,000", duration: '8 weeks', },
-    { id: 5, name: 'Python Programming Language', formerPrice: "200,000", price: "40,000", duration: '6 weeks', },
+    { id: 5, name: 'Python', formerPrice: "200,000", price: "40,000", duration: '6 weeks', },
   ];
 
   const timeVariable1 = new Date("01/31/2024 09:00:00");

@@ -2,6 +2,12 @@ import { useNavigate } from "react-router-dom";
 
 
 
+
+//! remember to find out how to generate IDs from Matic Drive !//
+
+
+
+
 function Dashboard() {
 const Navigate = useNavigate();
 
