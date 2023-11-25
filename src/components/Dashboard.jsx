@@ -3,12 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { collection, onSnapshot, orderBy, query, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from "../../FirebaseConfig";
 import { toast } from "react-toastify";
+import { AiFillDelete } from "react-icons/ai";
 
-
-
-
-
-//! remember to find out how to generate IDs from Matic Drive !//
 
 
 
@@ -29,6 +25,18 @@ useEffect(() => {
       setRegData(regDataFireBase.reverse());
   })
 }, [])
+
+const PaidOccurences = (array, key, value) => {
+  let count = 0;
+
+  for (let i = 0; i < array.length; i++) {
+    if (array[i][key] === value) {
+      count++;
+    }
+  }
+
+  return count;
+}
 
 const handlePaidClick = async (data) => {
   const paidRef = doc(db, "Registrations", data.id);
@@ -60,6 +68,7 @@ const handleDelete = async (data) => {
         <div className="flex flex-col justify-center items-center w-full h-[100dvh]">
             <div className="font-mono font-semibold text-[25px]">Dashboard</div>
             <div>Number of Applicants: {regData.length}</div>
+            <div>Number of Paid Applicants: {PaidOccurences(regData, "isPaid", true)}</div>
             <div>List of Applicants</div>
             
             <table className="sm:w-[95%] xs:w-[98%] w-[99%]">
@@ -98,41 +107,43 @@ const handleDelete = async (data) => {
                             : "sm:mb-[20px] xs:mb-[10px] mb-[20px]"}`}>
 
                     <td className="font-poppins text-start sm:text-[13px] xs:text-[12px] text-[12px] 
-                        xs:w-[5%] w-[3%] sm:pl-[10px] xs:pl-[2px] pl-[1px]">
+                        xs:w-[2%] w-[3%] sm:pl-[10px] xs:pl-[2px] pl-[1px]">
                         {reg.regID + 1}
                     </td>
                     <td className="text-start sm:text-[14px] xs:text-[11px] text-[9px] 
-                        xs:w-[17%] w-[49%]">
+                        xs:w-[20%] w-[49%]">
                         {reg.name}
                     </td>
                     <td className="font-mono text-start sm:text-[14px] xs:text-[11px] text-[9px] 
-                        xs:w-[15%] w-[20%] italic">
+                        xs:w-[8%] w-[20%] italic">
                         {reg.number}
                     </td>
                     <td className="font-mono text-start sm:text-[14px] xs:text-[11px] text-[9px] 
-                        xs:w-[15%] w-[18%] italic">
+                        xs:w-[20%] w-[18%] italic">
                         {reg.email}
                     </td>
                     <td className="font-poppins text-start sm:text-[14px] xs:text-[11px] text-[9px] 
-                        xs:w-[15%] w-[10%]">
+                        xs:w-[20%] w-[10%]">
                         {reg.courses}
                     </td>
                     <td 
                       onClick={() => handlePaidClick(reg)} 
                       className={`font-poppins text-start cursor-pointer sm:text-[14px] 
-                        xs:text-[11px] text-[9px] xs:w-[15%] w-[10%] 
+                        xs:text-[11px] text-[9px] xs:w-[5%] w-[10%] 
                         ${reg.isPaid === true ? "text-blue-600" : "text-red-600"}`}>
                         {reg.isPaid === true ? "Paid" : "Not Paid"}
                     </td>
-                    <td className="font-poppins text-start sm:text-[14px] xs:text-[11px] text-[9px] 
-                        xs:w-[15%] w-[10%]">
-                        {reg.createdAt.toDate().toDateString()}
-                    </td>
-                    <td 
-                      onClick={() => handleDelete(reg)} 
-                      className="text-start cursor-pointer text-red-500 sm:text-[13px] 
-                        xs:text-[11px] text-[9px] xs:w-[15%] w-[10%]">
-                        Delete
+                    <td className="xs:w-[10%] w-[10%]">
+                        <div className="flex flex-row justify-end">
+                          <div className="text-center sm:text-[14px] xs:text-[11px] text-[9px] w-[80%]">
+                            {reg.createdAt.toDate().toDateString()}
+                          </div>
+                          <div 
+                            onClick={() => handleDelete(reg)} 
+                            className="flex justify-center items-center cursor-pointer w-[20%]">
+                            <AiFillDelete name="AiFillDelete" size={24} color="black" />
+                          </div>
+                        </div>
                     </td>
                   </tr>
                 ))}

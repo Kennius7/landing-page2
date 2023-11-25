@@ -5,8 +5,6 @@ import RegisterHome from "./RegisterHome";
 import { Timestamp, addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from "../../FirebaseConfig";
 // import { toast } from "react-toastify";
-// import axios from 'axios';
-// import countryCodes from "country-codes-list";
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 
@@ -14,7 +12,6 @@ import 'react-international-phone/style.css';
 
 function Register() {
     const { courses } = useContext(mainContext);
-    // const [isOpen, setIsOpen] = useState(false);
     const formSuccessMessage = "Form submitted successfully!";
     const formErrorMessage1 = "Error submitting form. Please try again.";
     const formErrorMessage2 = "Form has errors. Please fix them.";
@@ -22,31 +19,17 @@ function Register() {
         name: '',
         email: '',
         number: '',
-        countryCode: 'Nigeria (+234)',
         courses: '',
-        isPaid: false,
     });
     const [phone, setPhone] = useState("");
 
     const [errors, setErrors] = useState({});
     const [submitErrors, setSubmitErrors] = useState("");
     const [regData, setRegData] = useState([]);
-    // const phoneValidation = usePhoneValidation(phone);
-    // const myCountryCodesArray = countryCodes.all();
-    // const newCountryCodesArray = myCountryCodesArray.map((country, index) => ({
-    //     countryCodes: country.countryCallingCode,
-    //     countryName: country.countryNameEn,
-    //     id: index + 1,
-    // }))
-    // const sortedCountryDataArray = newCountryCodesArray.sort((a, b) => a.countryName.localeCompare(b.countryName));
-
 
     useEffect(() => {
         const regDataRef = collection(db, "Registrations");
         const q = query(regDataRef, orderBy("createdAt", "desc"));
-        // console.log(countryCodes);
-        // console.log(myCountryCodesArray);
-        // console.log(countryCodesArray);
     
         onSnapshot(q, (snapshot) => {
             const regDataFireBase = snapshot.docs.map((doc) => ({
@@ -100,18 +83,6 @@ function Register() {
         return Object.keys(errors).length === 0;
     };
 
-    // const toggleDropdown = () => {
-    //     setIsOpen(!isOpen);
-    // };
-
-    // const handleOptionClick = (option) => {
-    //     setFormData({
-    //         ...formData,
-    //         courses: option,
-    //     });
-    //     setIsOpen(false);
-    // };
-
     const generateHighestId = () => {
         if (regData.length === 0) {
             return 0
@@ -136,7 +107,7 @@ function Register() {
                 number: parseInt(phone.toString().slice(1)),
                 courses: formData.courses,
                 createdAt: Timestamp.now().toDate(),
-                isPaid: true,
+                isPaid: false,
                 regID: generateHighestId(),
             })
             .then(() => {
