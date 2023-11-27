@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { mainContext } from "../context/mainContext";
 import RegisterHome from "./RegisterHome";
@@ -10,7 +11,9 @@ import 'react-international-phone/style.css';
 
 
 
+
 function Register() {
+    const Navigate = useNavigate();
     const { courses } = useContext(mainContext);
     const formSuccessMessage = "Form submitted successfully!";
     const formErrorMessage1 = "Error submitting form. Please try again.";
@@ -22,10 +25,10 @@ function Register() {
         courses: '',
     });
     const [phone, setPhone] = useState("");
-
     const [errors, setErrors] = useState({});
     const [submitErrors, setSubmitErrors] = useState("");
     const [regData, setRegData] = useState([]);
+
 
     useEffect(() => {
         const regDataRef = collection(db, "Registrations");
@@ -40,6 +43,14 @@ function Register() {
         })
     }, [])
 
+    const checkCourseAmount = () => {
+        for (let i = 0; i < courses.length; i++) {
+            if (formData.courses === courses[i].name) {
+                console.log(courses[i].price);
+                return courses[i].price;
+            }
+        }
+    }
 
     const handleChange = (e) => {
         setFormData({
@@ -97,7 +108,6 @@ function Register() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(parseInt(phone.toString().slice(1)));
-        console.log(typeof parseInt(phone.toString().slice(1)));
 
         if (validateForm()) {
             const regDataRef = collection(db, "Registrations");
@@ -119,6 +129,10 @@ function Register() {
         } else {
             setSubmitErrors(formErrorMessage2);
         }
+        localStorage.setItem("regDataEmail", formData.email);
+        localStorage.setItem("regDataName", formData.name);
+        localStorage.setItem("regDataAmount", checkCourseAmount());
+        Navigate("/payment");
     };
 
     return (
@@ -170,20 +184,6 @@ function Register() {
                                 className="block text-gray-700 text-sm font-bold mb-2">
                                 Phone Number
                             </label>
-                            {/* <select
-                                name="countryCode"
-                                value={formData.countryCode}
-                                onChange={handleChange}
-                                className="border p-2"
-                            >
-                                {sortedCountryDataArray.map(country => (
-                                    <option 
-                                        key={country.id} 
-                                        value={country.countryCodes}>
-                                        {`${country.countryName} (+${country.countryCodes})`}
-                                    </option>
-                                ))}
-                            </select> */}
                             <div className='w-full'>
                                 <PhoneInput
                                     defaultCountry="ng"
@@ -196,22 +196,6 @@ function Register() {
                             </div>
 
                         </div>
-
-                        {/* <div className="mb-4">
-                            <label htmlFor="number" className="block text-gray-700 text-sm font-bold mb-2">
-                                Phone Number (Whatsapp)
-                            </label>
-                            <input
-                                type="number"
-                                id="number"
-                                name="number"
-                                placeholder="Whatsapp number preferably"
-                                value={formData.number}
-                                onChange={handleChange}
-                                className={`w-full px-3 py-2 border ${errors.number ? 'border-red-500' : 'border-gray-300'} rounded`}
-                            />
-                            {errors.number && <p className="text-red-500 text-xs italic mt-2">{errors.number}</p>}
-                        </div> */}
 
                         <div className="mb-4">
                             <label htmlFor="courses" className="block text-gray-700 text-sm font-bold mb-2">
@@ -233,36 +217,6 @@ function Register() {
                                     </option>
                                 ))}
                             </select>
-                            {/* {errors.courses && <p className="text-red-500 text-xs italic mt-2">{errors.courses}</p>}
-                            <input
-                                type="text"
-                                id="courses"
-                                name="courses"
-                                placeholder="Select an option"
-                                value={formData.courses}
-                                onClick={toggleDropdown}
-                                onChange={handleChange}
-                                className={`w-full px-3 py-2 border 
-                                ${errors.courses ? 'border-red-500' : 'border-gray-300'} rounded`}
-                            />
-                            {isOpen && (
-                                <div className="origin-top-right absolute left-[34%] mt-2 w-56 rounded-md 
-                                    shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                                    <div className="py-1">
-                                        {courses.map((course) => (
-                                            <div
-                                                key={course.id}
-                                                onClick={() => handleOptionClick(course.name)}
-                                                className="block text-start pl-3 px-6 py-3 text-sm text-gray-700 
-                                                    hover:bg-blue-500 hover:text-white cursor-pointer"
-                                            >
-                                                {course.name}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-                            {errors.courses && <p className="text-red-500 text-xs italic mt-2">{errors.courses}</p>} */}
                         </div>
 
                         <div className="mt-[50px] text-center">

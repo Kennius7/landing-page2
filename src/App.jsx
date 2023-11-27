@@ -5,17 +5,18 @@ import LandingPage from "./components/LandingPage";
 import Register from "./components/Register";
 import ScrollToTop from "./ScrollToTop";
 import Dashboard from "./components/Dashboard";
+import PaymentPage from "./components/PaymentPage";
 
 
 
 function App() {
   const courses = [
-    { id: 0, name: 'Web Design Basics', formerPrice: "100,000", price: "30,000", duration: '4 weeks', },
-    { id: 1, name: 'Advanced Web Design', formerPrice: "200,000", price: "40,000", duration: '4 weeks', },
-    { id: 2, name: 'Front End Development (React)', formerPrice: "300,000", price: "45,000", duration: '8 weeks', },
-    { id: 3, name: 'Back End Development (Node.js)', formerPrice: "300,000", price: "50,000", duration: '8 weeks', },
-    { id: 4, name: 'Mobile App Development (React Native)', formerPrice: "350,000", price: "50,000", duration: '8 weeks', },
-    { id: 5, name: 'Python', formerPrice: "200,000", price: "40,000", duration: '6 weeks', },
+    { id: 0, name: 'Web Design Basics', formerPrice: 100000, price: 30000, duration: '4 weeks', },
+    { id: 1, name: 'Advanced Web Design', formerPrice: 200000, price: 40000, duration: '4 weeks', },
+    { id: 2, name: 'Front End Development (React)', formerPrice: 300000, price: 45000, duration: '8 weeks', },
+    { id: 3, name: 'Back End Development (Node.js)', formerPrice: 300000, price: 50000, duration: '8 weeks', },
+    { id: 4, name: 'Mobile App Development (React Native)', formerPrice: 350000, price: 50000, duration: '8 weeks', },
+    { id: 5, name: 'Python', formerPrice: 200000, price: 40000, duration: '6 weeks', },
   ];
 
   const timeVariable1 = new Date("01/31/2024 09:00:00");
@@ -63,6 +64,7 @@ function App() {
             <Route path="/" element={ <LandingPage /> } />
             <Route path="/register" element={ <Register /> } />
             <Route path="/dashboard" element={ <Dashboard /> } />
+            <Route path="/payment" element={ <PaymentPage /> } />
           </Routes>
         </BrowserRouter>
       </mainContext.Provider>
