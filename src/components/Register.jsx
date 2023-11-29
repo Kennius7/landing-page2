@@ -122,6 +122,11 @@ function Register() {
             })
             .then(() => {
                 setSubmitErrors(formSuccessMessage);
+                localStorage.setItem("regDataEmail", formData.email);
+                localStorage.setItem("regDataName", formData.name);
+                localStorage.setItem("regDataAmount", checkCourseAmount());
+                localStorage.setItem("regDataCourses", formData.courses);
+                Navigate("/payment");
             })
             .catch(() => {
                 setSubmitErrors(formErrorMessage1);
@@ -129,10 +134,6 @@ function Register() {
         } else {
             setSubmitErrors(formErrorMessage2);
         }
-        localStorage.setItem("regDataEmail", formData.email);
-        localStorage.setItem("regDataName", formData.name);
-        localStorage.setItem("regDataAmount", checkCourseAmount());
-        Navigate("/payment");
     };
 
     return (
