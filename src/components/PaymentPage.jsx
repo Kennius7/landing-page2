@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { PaystackButton } from 'react-paystack';
-// import { useState } from "react";
-// import { v4 as uuidv4 } from 'uuid';
+import { useState, useEffect } from "react";
+import { collection, onSnapshot, orderBy, query, doc, updateDoc } from 'firebase/firestore';
+import { db } from "../../FirebaseConfig";
+
 
 
 
@@ -13,6 +15,30 @@ const PaymentPage = () => {
     const localStoredCourses = localStorage.getItem("regDataCourses");
     const publicKey = "pk_test_cb8876e3a6b1832d49307457a40c1dca20765fe5";
     const whatsappGroupLink = "https://chat.whatsapp.com/FxRGqESDY9NGzwrUs7WXSr";
+    const [regData, setRegData] = useState([]);
+
+    useEffect(() => {
+        const regDataRef = collection(db, "Registrations");
+        const q = query(regDataRef, orderBy("createdAt", "desc"));
+    
+        onSnapshot(q, (snapshot) => {
+            const regDataFireBase = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+            }));
+            setRegData(regDataFireBase);
+        })
+    }, [])
+
+    const checkPaidStatus = () => {
+        for (let i = 0; i < regData.length; i++) {
+            if (localStoredEmail === regData[i].email) {
+                const paidRef = doc(db, "Registrations", regData[i].id);
+                updateDoc(paidRef, {isPaid: !regData[i].isPaid});
+            }
+        }
+    }
+
     const componentProps = {
         reference: (new Date()).getTime(),
         email: localStoredEmail,
@@ -27,6 +53,7 @@ const PaymentPage = () => {
         currency: "NGN",
         text: 'Pay Now',
         onSuccess: (response) => {
+            checkPaidStatus();
             alert(`Payment successful. Ref. Number: ${response.reference}`);
             window.location.href(whatsappGroupLink);
         },
