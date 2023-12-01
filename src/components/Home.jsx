@@ -5,6 +5,7 @@ import { mainContext } from "../context/mainContext";
 import RegisterButton from "./RegisterButton";
 
 
+
 const Home = () => {
     const { days, hours, minutes, seconds } = useContext(mainContext);
     // 🚀🚀🚀

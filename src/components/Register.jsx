@@ -28,6 +28,7 @@ function Register() {
     const [errors, setErrors] = useState({});
     const [submitErrors, setSubmitErrors] = useState("");
     const [regData, setRegData] = useState([]);
+    const [isEmailUsed, setIsEmailUsed] = useState(false);
 
 
     useEffect(() => {
@@ -48,6 +49,16 @@ function Register() {
             if (formData.courses === courses[i].name) {
                 console.log(courses[i].price);
                 return courses[i].price;
+            }
+        }
+    }
+
+    const checkEmailUsed = () => {
+        for (let i = 0; i < regData.length; i++) {
+            if (formData.email === regData[i].email) {
+                console.log("This email has been used before!");
+                setIsEmailUsed(true);
+                return isEmailUsed;
             }
         }
     }
@@ -73,13 +84,18 @@ function Register() {
             errors.email = 'Valid email is required';
         }
 
+        if (checkEmailUsed() === true) {
+            errors.email = "This email has been used before!";
+            setIsEmailUsed(false);
+        }
+
         // Validate phone number
         const numberRegex = /[0-9]/;
         if (!numberRegex.test(parseInt(phone.toString().slice(1)))) {
             errors.number = 'Valid number is required';
         }
 
-        if (phone === "") {
+        if (phone === "" || phone === "234") {
             errors.number = 'Please type in a Phone number';
         }
 

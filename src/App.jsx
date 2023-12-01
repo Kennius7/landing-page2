@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
 import { mainContext } from "./context/mainContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LandingPage from "./components/LandingPage";
-import Register from "./components/Register";
 import ScrollToTop from "./ScrollToTop";
-import Dashboard from "./components/Dashboard";
-import PaymentPage from "./components/PaymentPage";
+import { LandingPage, Register, Dashboard, PaymentPage, UserBoard, Login, SignUp } from "./components";
 
 
 
@@ -65,6 +62,9 @@ function App() {
             <Route path="/register" element={ <Register /> } />
             <Route path="/dashboard" element={ <Dashboard /> } />
             <Route path="/payment" element={ <PaymentPage /> } />
+            <Route path="/userboard" element={ <UserBoard /> } />
+            <Route path="/login" element={ <Login /> } />
+            <Route path="/signup" element={ <SignUp /> } />
           </Routes>
         </BrowserRouter>
       </mainContext.Provider>

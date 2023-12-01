@@ -1,10 +1,4 @@
-import BulletPoints from "./BulletPoints"
-import CallToAction from "./CallToAction"
-import CourseList from "./CourseList"
-import Home from "./Home"
-import Intro from "./Intro"
-
-
+import { BulletPoints, CallToAction, CourseList, Home, Intro } from "./index";
 
 
 function LandingPage() {
@@ -20,3 +14,4 @@ function LandingPage() {
 }
 
 export default LandingPage
+
