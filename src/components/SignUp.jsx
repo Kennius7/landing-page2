@@ -29,10 +29,10 @@ function Register() {
     }
 
     const SignUpTimeOut = () => {
-      setTimeout(() => {
-          setSignUpText("Sign Up");
-      }, 3000);
-  }
+        setTimeout(() => {
+            setSignUpText("Sign Up");
+        }, 3000);
+    }
 
 
   const toastErrorMessageFunction = (error) => {
@@ -80,7 +80,6 @@ function Register() {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
             signInWithEmailAndPassword(auth, email, password);
-            // @ts-ignore
             updateProfile(auth.currentUser, { displayName: name });
             setTimeout(() => {
                 setSignUpText("Sign Up");

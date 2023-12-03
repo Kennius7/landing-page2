@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, onSnapshot, orderBy, query, deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { db } from "../../FirebaseConfig";
+import { db, auth } from "../../FirebaseConfig";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { deleteUser } from "firebase/auth";
 import { toast } from "react-toastify";
 import { AiFillDelete } from "react-icons/ai";
 
@@ -12,6 +14,7 @@ import { AiFillDelete } from "react-icons/ai";
 function Dashboard() {
 const Navigate = useNavigate();
 const [regData, setRegData] = useState([]);
+const [user] = useAuthState(auth);
 
 useEffect(() => {
   const regDataRef = collection(db, "Registrations");
@@ -53,11 +56,19 @@ const handlePaidClick = async (data) => {
 const handleDelete = async (data) => {
   if (window.confirm(`Are you sure you want to delete this entry: ${data.name}?`)) {
     try {
-      await deleteDoc(doc(db, "Registrations", data.id)) 
-      toast("Registration data deleted successfully", { type: "success", position: toast.POSITION.TOP_RIGHT })
+      await deleteUser(user)
+        toast("User data deleted successfully", { type: "success", position: toast.POSITION.TOP_RIGHT });
+        deleteDoc(doc(db, "Registrations", data.id))
+        .then(()=>{
+          toast("Registration data deleted successfully", { type: "success", position: toast.POSITION.TOP_RIGHT });
+        })
+        .catch((error)=>{
+          toast("Error deleting registration data!", { type: "error", position: toast.POSITION.TOP_RIGHT })
+          console.log(error);
+        })
     } catch (error) {
-      toast("Error deleting registration data!", { type: "error", position: toast.POSITION.TOP_RIGHT })
-      console.log(error);
+      toast("Error deleting User Data", { type: "error", position: toast.POSITION.TOP_RIGHT })
+      console.error(error);
     }
   }
 }

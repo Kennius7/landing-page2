@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { PaystackButton } from 'react-paystack';
 import { useState, useEffect } from "react";
 import { collection, onSnapshot, orderBy, query, doc, updateDoc } from 'firebase/firestore';
+// import { useAuthState } from "react-firebase-hooks/auth";
 import { db } from "../../FirebaseConfig";
 import logo from "../assets/shosanacodemia-logo111.png";
 
@@ -15,12 +16,15 @@ const PaymentPage = () => {
     const localStoredAmount = localStorage.getItem("regDataAmount");
     const localStoredCourses = localStorage.getItem("regDataCourses");
     const publicKey = "pk_test_cb8876e3a6b1832d49307457a40c1dca20765fe5";
-    const whatsappGroupLink = "https://chat.whatsapp.com/FxRGqESDY9NGzwrUs7WXSr";
+    const whatsappGroupLink = "https://chat.whatsapp.com/JhmoqUlG7VR2AGfKcwSBoI";
     const [regData, setRegData] = useState([]);
+    
+    
 
     useEffect(() => {
         const regDataRef = collection(db, "Registrations");
         const q = query(regDataRef, orderBy("createdAt", "desc"));
+     
     
         onSnapshot(q, (snapshot) => {
             const regDataFireBase = snapshot.docs.map((doc) => ({
@@ -38,6 +42,8 @@ const PaymentPage = () => {
                 updateDoc(paidRef, {isPaid: !regData[i].isPaid});
             }
         }
+        window.open(whatsappGroupLink, '_blank', 'noreferrer');
+        console.log(whatsappGroupLink);
     }
 
     const componentProps = {
@@ -54,9 +60,8 @@ const PaymentPage = () => {
         currency: "NGN",
         text: 'Pay Now',
         onSuccess: (response) => {
-            checkPaidStatus();
             alert(`Payment successful. Ref. Number: ${response.reference}`);
-            window.open(whatsappGroupLink, '_blank', 'popup');
+            checkPaidStatus();
         },
         onClose: () => alert('Payment canceled by user.'),
         metadata: {
