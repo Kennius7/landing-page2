@@ -1,15 +1,16 @@
-import { BulletPoints, CallToAction, CourseList, Home, Intro } from "./index";
+import { BulletPoints, CallToAction, CourseList, Home, Intro, Requirement } from "./index";
 
 
 function LandingPage() {
   return (
-    <div>
+    <>
         <Home/>
         <Intro/>
         <CourseList/>
+        <Requirement/>
         <BulletPoints/>
         <CallToAction/>
-    </div>
+    </>
   )
 }
 

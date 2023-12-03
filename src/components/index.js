@@ -10,4 +10,5 @@ export { default as PaymentPage } from "./PaymentPage";
 export { default as UserBoard } from "./UserBoard";
 export { default as Login } from "./Login";
 export { default as SignUp } from "./SignUp";
+export { default as Requirement } from "./Requirement";
 
