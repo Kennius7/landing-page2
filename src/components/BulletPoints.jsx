@@ -86,14 +86,16 @@ function BulletPoints() {
 
   return (
     <>
-      <div className="flex flex-col justify-between items-center bg-white w-full md:h-[500px] sm:h-[500px] 
+      <div className="flex flex-col justify-between items-center bg-white w-full md:h-[400px] sm:h-[500px] 
         xs:h-[450px] h-[440px]">
+
         <div className="flex justify-center items-center">
           <div className="font-poppins font-semibold text-center md:text-[35px] sm:text-[27px] xs:text-[20px] 
             text-[17px] xs:w-full w-[92%] mt-[20px]">
             WHY CHOOSE OUR ONLINE PROGRAMMING CLASSES?
           </div>
         </div>
+
         <div className="w-full bg-slate-700">
           <Splide options={reasonWhySplideOptions}>
             {reasonWhySlide.map((card) => (
@@ -127,10 +129,7 @@ function BulletPoints() {
             ))}
           </Splide>
         </div>
-        <div className="text-center sm:text-[22px] xs:text-[17px] text-[15px] xs:w-[80%] w-[90%] mb-[20px]">
-          Ready to transform your life through coding? Secure your spot today and embrace a 
-          future filled with endless possibilities!
-        </div>
+
       </div>
     </>
   )

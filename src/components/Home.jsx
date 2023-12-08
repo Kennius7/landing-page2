@@ -2,7 +2,7 @@ import backgroundPics from "../assets/home-bg.webp";
 import logo from "../assets/shosanacodemia-logo111.png";
 import { useContext } from "react";
 import { mainContext } from "../context/mainContext";
-import RegisterButton from "./RegisterButton";
+// import RegisterButton from "./RegisterButton";
 
 
 
@@ -44,25 +44,39 @@ const Home = () => {
                     <div className="w-full flex flex-col justify-center items-center">
 
                         <div className="w-full flex flex-col justify-center items-center 
-                            md:mb-[4%] sm:mb-[10%] xs:mb-[12%] mb-[13%]">
+                            md:mb-[4%] sm:mb-[3%] xs:mb-[4%] mb-[3%]">
 
                             <div className="font-poppins font-semibold text-center md:text-[39px] 
                                 sm:text-[32px] xs:text-[24px] text-[20px] md:max-w-[800px] sm:max-w-[600px] 
-                                xs:max-w-[380px] max-w-[320px] md:tracking-[3px] tracking-normal md:mb-[1%] 
+                                xs:max-w-[420px] max-w-[320px] md:tracking-[3px] tracking-normal md:mb-[1%] 
                                 sm:mb-[1%] xs:mb-[3%] mb-[2%] xs:leading-normal leading-[27px]">
                                 Unlock Your Coding Potential with Our Online Programming Classes 
                             </div>
-                            <div className="font-poppins font-semibold text-primary text-center 
-                                sm:text-[20px] xs:text-[16px] text-[14px] md:mb-[1%] sm:mb-[2%] xs:mb-[3%] 
-                                mb-[4%] xs:w-full w-[82%]">
-                                Seize this opportunity with a&nbsp;
-                                <span className="font-poppins font-semibold text-blue-700 
-                                    sm:text-[28px] xs:text-[20px] text-[16px]">
-                                    70%
-                                </span> discount on all courses!
+                            <div className="flex flex-wrap justify-center items-center font-poppins font-semibold 
+                                text-primary md:mb-[2%] sm:mb-[8%] xs:mb-[14%] mb-[10%] xs:w-full w-[82%]">
+                                <div className="text-center sm:text-[20px] xs:text-[16px] text-[14px] mr-[10px]">
+                                    Seize this opportunity with a whooping
+                                </div>
+                                <div className="font-poppins font-semibold text-blue-700 
+                                    sm:text-[28px] xs:text-[20px] text-[18px]">
+                                    90%
+                                </div>
+                                &nbsp;
+                                <div className="md:w-[230px] sm:w-[230px] xs:w-[180px] w-[160px] 
+                                    md:text-[24px] sm:text-[20px] xs:text-[16px] text-[14px] bg-red-600 
+                                    text-green-800 rounded-[8px] px-2 py-1 bounce-element ml-[6px]">
+                                    Christmas discount
+                                </div> 
+                                <div className="text-center sm:text-[20px] xs:text-[16px] text-[17px] ml-[10px]">
+                                    on all courses!
+                                </div>
                             </div>
-                            <div className="flex justify-center items-center md:w-full sm:w-[80%] w-[96%]">
-                                <RegisterButton/>
+                            <div className="flex justify-center items-center bg-blue-100 rounded-[10px] 
+                                border-[1px] border-yellow-500 md:w-[20%] sm:w-[30%] xs:w-[35%] w-[45%]">
+                                <div className="font-sans font-bold text-slate-800 sm:text-[26px] 
+                                    xs:text-[20px] text-[16px] my-[3px]">
+                                    Offer Lasts Till
+                                </div>
                             </div>
 
                         </div>

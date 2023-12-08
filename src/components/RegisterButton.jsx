@@ -16,7 +16,7 @@ function RegisterButton() {
                     w-[50%] sm:h-[45px] xs:h-[40px] h-[35px] box-shadow text-white 
                     hover:border-[2px] focus:border-[2px] hover:border-yellow-700 
                     focus:border-yellow-700 duration-1000 md:text-[20px] sm:text-[18px] xs:text-[16px] 
-                    text-[13px]">
+                    text-[13px] zoom-in-out-element">
                     Register Now
             </button>
         </>

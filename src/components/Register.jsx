@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { mainContext } from "../context/mainContext";
+import courses from "../data";
 import RegisterHome from "./RegisterHome";
 import { Timestamp, addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from "../../FirebaseConfig";
@@ -16,10 +15,6 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 function Register() {
     const Navigate = useNavigate();
-    const { courses } = useContext(mainContext);
-    // const formSuccessMessage = "Form submitted successfully!";
-    // const formErrorMessage1 = "Error submitting form. Please try again.";
-    // const formErrorMessage2 = "Form has errors. Please fix them.";
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -29,7 +24,6 @@ function Register() {
     });
     const [phone, setPhone] = useState("");
     const [errors, setErrors] = useState({});
-    // const [submitErrors, setSubmitErrors] = useState("");
     const [regData, setRegData] = useState([]);
     const [isEmailUsed, setIsEmailUsed] = useState(false);
     const [submitText, setSubmitText] = useState("Submit");
@@ -211,11 +205,9 @@ function Register() {
             })
             .catch(() => {
                 console.log("Registration Not successful");
-                // setSubmitErrors(formErrorMessage1);
             })
         } else {
             console.log("No Registration");
-            // setSubmitErrors(formErrorMessage2);
         }
     };
 

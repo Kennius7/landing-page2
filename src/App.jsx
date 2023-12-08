@@ -7,15 +7,6 @@ import { LandingPage, Register, Dashboard, PaymentPage, UserBoard, Login, SignUp
 
 
 function App() {
-  const courses = [
-    { id: 0, name: 'Web Design Basics', formerPrice: 100000, price: 30000, duration: '4 weeks', },
-    { id: 1, name: 'Advanced Web Design', formerPrice: 200000, price: 40000, duration: '4 weeks', },
-    { id: 2, name: 'Front End Development (React)', formerPrice: 300000, price: 45000, duration: '8 weeks', },
-    { id: 3, name: 'Back End Development (Node.js)', formerPrice: 300000, price: 50000, duration: '8 weeks', },
-    { id: 4, name: 'Mobile App Development (React Native)', formerPrice: 350000, price: 50000, duration: '8 weeks', },
-    { id: 5, name: 'Python', formerPrice: 200000, price: 40000, duration: '6 weeks', },
-  ];
-
   const timeVariable1 = new Date("01/31/2024 09:00:00");
   const timeVariable2 = new Date;
   const timeTodayCounted = timeVariable2.valueOf();
@@ -54,7 +45,7 @@ function App() {
 
   return (
     <>
-      <mainContext.Provider value={{ hours, minutes, seconds, days, courses}}>
+      <mainContext.Provider value={{ hours, minutes, seconds, days }}>
         <BrowserRouter>
           <ScrollToTop/>
           <Routes>

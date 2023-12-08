@@ -1,23 +1,48 @@
-import { useContext } from "react";
-import { mainContext } from "../context/mainContext";
-
+import courses from "../data";
 
 
 function CourseList() {
-    const { courses } = useContext(mainContext);
-
 
     return (
         <>
-            <div className="flex flex-col justify-center items-center bg-slate-50 w-full sm:h-[600px] 
+            <div className="flex flex-col justify-center items-center bg-slate-50 w-full sm:h-[1200px] 
                 xs:h-[400px] h-[350px]">
+
                 <div className="font-poppins font-semibold text-start sm:w-[95%] xs:w-[98%] w-[99%] 
-                    sm:text-[30px] xs:text-[25px] text-[18px]">
-                    Course List
+                    sm:text-[30px] xs:text-[25px] text-[18px] mb-[20px]">
+                    Course Information Brochure
+                    <hr className="bg-primary w-full h-[2px]"/>
                 </div>
+
+                <div className="flex justify-center items-center w-full mb-[30px]">
+                    <ul className="flex flex-wrap justify-between items-center w-[90%]">
+                        {
+                            courses.map((course) => (
+                                <li key={course.id} 
+                                    className="flex flex-col justify-center items-start w-[45%] my-[20px]">
+                                    <div className="flex justify-start items-center">
+                                        <img 
+                                            src={course.picsRep} 
+                                            alt={course.alt} 
+                                            className="w-[40px] h-[40px] m-1" />
+                                        <div className="font-semibold font-sans text-[22px]">
+                                            {course.name}
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-start items-center w-full">
+                                        <div className="font-sans italic ml-[40px] w-[90%] text-[16px]">
+                                            {course.description}
+                                        </div>
+                                    </div>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+
                 <table className="sm:w-[95%] xs:w-[98%] w-[99%]">
                     <thead className="w-full">
-                        <tr className="bg-blue-200 sm:h-[60px] xs:h-[40px] h-[28px]">
+                        <tr className="bg-blue-100 sm:h-[60px] xs:h-[40px] h-[28px]">
                             <th className="font-semibold text-start sm:text-[20px] xs:text-[12px] text-[10px]">S/N</th>
                             <th className="font-semibold text-start sm:text-[22px] xs:text-[13px] text-[11px]">Course</th>
                             <th className="font-semibold text-start sm:text-[22px] xs:text-[13px] text-[11px]">Old Price</th>

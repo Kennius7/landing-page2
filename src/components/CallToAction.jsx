@@ -38,16 +38,11 @@ function CallToAction() {
 
             <div className="flex flex-col justify-between items-center absolute z-1 top-[10%] left-0 
                 w-full h-[80%]">
-                <div className="text-center md:text-[22px] sm:text-[18px] xs:text-[16px] text-[14px] 
-                    md:w-[50%] sm:w-[60%] xs:w-[70%] w-[85%]">
-                    Ready to transform your life through coding? Secure your spot today and embrace a 
-                    future filled with endless possibilities!
-                </div>
-
-                <div className="text-center md:text-[22px] sm:text-[18px] xs:text-[16px] text-[14px] 
-                    md:w-[50%] sm:w-[60%] xs:w-[70%] w-[85%]">
-                    Ready to transform your life through coding? Secure your spot today and embrace a 
-                    future filled with endless possibilities!
+                <div className="font-sans font-semibold text-center md:text-[22px] sm:text-[18px] 
+                    xs:text-[16px] text-[14px] md:w-[50%] sm:w-[60%] xs:w-[70%] w-[85%]">
+                    The world is ever changing so fast. drifting towards the tech zeitgeist. 
+                    Position yourself now and equip yourself to compete with the greats in tech 
+                    and embrace a future filled with endless possibilities!
                 </div>
 
                 <div className="flex flex-col justify-between items-center w-full h-[150px]">
@@ -57,12 +52,12 @@ function CallToAction() {
                         Enroll Now for a Coding Revolution!
                     </div>
                     <div className="font-poppins text-center font-semibold text-primary 
-                        sm:text-[18px] xs:text-[15px] text-[13px] xs:w-full w-[80%] mb-[15px]">
-                        Seize this opportunity with about&nbsp;
+                        sm:text-[18px] xs:text-[15px] text-[13px] xs:w-full w-[80%] mb-[30px]">
+                        Seize this opportunity with a whooping&nbsp;
                         <span className="font-poppins font-semibold text-blue-700 sm:text-[24px] 
                             xs:text-[18px] text-[16px]">
-                            70%
-                        </span> discount on all courses!
+                            90%
+                        </span> discount on all courses this Christmas period!
                     </div>
                     <div className="flex justify-center items-center w-full">
                         <RegisterButton/>
@@ -72,7 +67,7 @@ function CallToAction() {
                 <div className="font-mono text-center italic md:text-[20px] sm:text-[18px] xs:text-[16px] 
                     text-[14px] md:w-[50%] sm:w-[70%] xs:w-[80%] w-[90%] sm:mt-0 mt-[20px]">
                     Don&apos;t miss out on the opportunity to shape your destiny in the digital realm. 
-                    Join our online programming classes and unlock the doors to a world of endless opportunities!
+                    Join our online programming classes and become a master of code!
                 </div>
             </div>
 
