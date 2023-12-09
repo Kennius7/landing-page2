@@ -335,14 +335,6 @@ function Register() {
                             >
                                 {submitText}
                             </button>
-                            {/* {
-                                submitErrors && 
-                                <p className={`${submitErrors === formSuccessMessage 
-                                    ? 'text-blue-500' 
-                                    : 'text-red-500'} text-xs italic mt-2`}>
-                                    {submitErrors}
-                                </p>
-                            } */}
                         </div>
                     </form>
                 </div>

@@ -14,7 +14,7 @@ const Home = () => {
 
     return (
         <>
-            <div className="w-full relative md:h-[380px] sm:h-[600px] xs:h-[550px] h-[500px]">
+            <div className="w-full relative md:h-[380px] sm:h-[600px] xs:h-[400px] h-[300px]">
                 <div className="w-full h-full">
                     <img src={backgroundPics} className="w-full h-full object-cover opacity-40" />
                 </div>
@@ -55,9 +55,9 @@ const Home = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-center items-center w-[100%]">
+                        <div className="flex justify-center items-center w-full sm:mt-0 xs:-mt-[30px] -mt-[30%]">
 
-                            <div className="flex justify-around items-center xs:w-[70%] w-[90%]">
+                            <div className="flex justify-around items-center sm:w-[70%] xs:w-[80%] w-[90%]">
 
                                 <div className="flex flex-col justify-center items-center">
                                     <div className="flex justify-center items-center bg-primary box-shadow 

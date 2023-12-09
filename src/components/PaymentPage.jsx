@@ -44,6 +44,7 @@ const PaymentPage = () => {
         }
         window.open(whatsappGroupLink, '_blank', 'noreferrer');
         console.log(whatsappGroupLink);
+        Navigate("/login");
     }
 
     const componentProps = {
@@ -82,58 +83,68 @@ const PaymentPage = () => {
 
     return (
         <>
-            <div className="flex flex-col justify-start items-center w-full h-[650px] bg-slate-100">
-                <div className="flex justify-between items-center w-full h-[70px] bg-white mb-[30px]">
-                    <div className="flex justify-start items-center">
+            <div className="flex flex-col justify-start items-center w-full md:h-[800px] sm:h-[100dvh] 
+                xs:h-[800px] h-[100dvh] bg-slate-100">
+                <div className="flex justify-between items-center w-full sm:h-[70px] h-[60px] 
+                    bg-white mb-[30px]">
+                    <div className="flex justify-start items-center md:ml-0 xs:ml-[10px] ml-[4px]">
                         <img 
                             src={logo}
                             alt="logo" 
                             className="md:w-[40px] md:h-[40px] sm:w-[35px] sm:h-[35px] 
-                                xs:w-[30px] xs:h-[30px] w-[24px] h-[24px] rounded-[50%]" 
+                                xs:w-[30px] xs:h-[30px] w-[32px] h-[32px] rounded-[50%]" 
                         />
                         <div className="font-poppins font-semibold text-start md:text-[22px] sm:text-[20px] 
-                            xs:text-[16px] text-[13px] sm:pl-[10px] pl-[6px]">
+                            xs:text-[18px] text-[15px] sm:pl-[10px] pl-[6px]">
                             Shosan Code Hub
                         </div>
                     </div>
 
-                    <div className="flex justify-around items-center w-[30%]">
-                        <div className='flex justify-center items-center w-[50%]'>
+                    <div className="flex justify-around items-center sm:w-[30%] w-[40%]">
+                        <div className='flex justify-center items-center sm:w-[50%] xs:w-[55%] w-[60%]'>
                             <PaystackButton 
-                                className='bg-green-500 rounded-[7px] py-[10px] h-[40px] text-[16px] w-full'
+                                className='bg-green-500 rounded-[7px] md:py-[3px] sm:py-[10px] 
+                                xs:py-[5px] py-[2px] sm:h-[40px] xs:h-[35px] h-[30px] sm:text-[16px] 
+                                xs:text-[14px] text-[13px] w-full'
                                 {...componentProps} 
                             />
                         </div>
 
-                        <div className="flex justify-center items-center w-[30%]">
+                        <div className="flex justify-center items-center sm:w-[30%] xs:w-[40%] w-[35%]">
                             <button 
                                 onClick={()=>Navigate(-1)} 
-                                className="bg-red-100 rounded-[10px] w-full h-[40px] text-center text-[16px]">
+                                className="bg-red-100 rounded-[7px] w-full sm:h-[40px] xs:h-[35px] h-[30px] 
+                                text-center xs:text-[16px] text-[13px]">
                                 Back
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div className="block text-gray-700 text-[25px] font-bold mb-2">
+                <div className="block text-gray-700 md:text-[25px] sm:text-[22px] xs:text-[23px] 
+                    text-[18px] font-bold md:mb-2 mb-0">
                     Payment Page
                 </div>
 
                 <div className="bg-gray-400 flex justify-center items-center rounded-[10px] 
-                    w-[35%] mt-[20px] h-[200px]">
-                    <div className="font-sans font-semibold text-primary text-center p-3 text-[18px] w-full">
+                    md:w-[35%] sm:w-[40%] xs:w-[65%] w-[95%] md:mt-[20px] mt-[10px] sm:h-[200px] 
+                    xs:h-[200px] h-[200px]">
+                    <div className="font-sans font-semibold text-primary text-center p-3 
+                        xs:text-[18px] text-[15px] w-full">
                         Hello, {localStoredName}. You are about to pay the sum of&nbsp;
                         <span className="text-green-700">NGN {localStoredAmount}</span>, 
                         in order to complete registration for a {localStoredCourses} course.
                     </div>
                 </div>
 
-                <div className="flex flex-col justify-center items-center w-full mt-[40px]">
-                    <div className="flex justify-center items-center bg-white rounded-[10px] w-[35%]">
+                <div className="flex flex-col justify-center items-center w-full md:mt-[40px] mt-[20px]">
+                    <div className="flex justify-center items-center bg-white rounded-[10px] md:w-[35%] 
+                        sm:w-[40%] xs:w-[65%] w-[95%]">
                         <div className="font-sans text-gray-700 italic text-center text-[16px] m-[20px]">
                             Once payment is made successfully, you are to get an email verifying payment, 
                             and also be prompted to join the Whatsapp group, Shosan Code Hub, wherein you 
-                            will be onboarded for your classes. <br/>If there are any complaints, like payment 
+                            will be onboarded for your classes. <br/><br className="sm:hidden block"/>
+                            If there are any complaints, like payment 
                             errors, or not being able to join the group, you can contact us by clicking 
                             here:<br/>
                             <span 
