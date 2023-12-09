@@ -1,8 +1,8 @@
-import webDesignBasicPics from "./assets/logos-edits-html5.webp";
-import reactPics from "./assets/logos-edits-react.webp";
-import nodePics from "./assets/logos-edits-nodejs.webp";
-import reactNativePics from "./assets/logos-edits-react-native.webp";
-import pythonPics from "./assets/logos-edits-python.webp";
+import { 
+    features01, features02, features03, features04, features05, 
+    features06, webDesignBasicPics, reactPics, reactNativePics, 
+    nodePics, pythonPics, laptop, power, dataConnect, study } from "./assets";
+
 
 
 const courseDesc = {
@@ -21,5 +21,59 @@ const courses = [
     { id: 4, name: 'Python', formerPrice: 300000, price: 30000, duration: '6 weeks', alt: 'Python Pics', picsRep: pythonPics, description: courseDesc.python },
 ];
 
+const imageDesc = {
+    laptop: "Duo Core Laptop or better",
+    data: "Steady data connection",
+    power: "Steady power supply (If possible)",
+    study: "A dogged willingness to learn",
+}
+
+export const requirementData = [
+    { id: 0, img: laptop, desc: imageDesc.laptop, },
+    { id: 1, img: dataConnect, desc: imageDesc.data, },
+    { id: 2, img: power, desc: imageDesc.power, },
+    { id: 3, img: study, desc: imageDesc.study, },
+]
+
+export const reasonWhySlide = [
+    {
+      id: 0,
+      name: "Expert Tutoring",
+      title: "Learn from professionals with years of hands-on experience. Our instructors are passionate about guiding you through the ins and outs of programming, ensuring you gain real-world insights",
+      img: features01,
+    },
+    {
+      id: 1,
+      name: "Comprehensive Curriculum",
+      title: "Stay ahead of the curve with a curriculum designed to cover the latest programming languages, frameworks, and industry trends. From Python to JavaScript, we've got you covered",
+      img: features02,
+    },
+    {
+      id: 2,
+      name: "Flexible Learning",
+      title: "Life is busy, and we get it! Our online classes are structured to fit your schedule. Learn at your own pace, from the comfort of your home, and access course materials 24/7",
+      img: features03,
+    },
+    {
+      id: 3,
+      name: "Hands-On Projects",
+      title: "Put theory into practice with engaging, hands-on projects that reinforce your learning. Build a portfolio of impressive projects to showcase your skills to future employers",
+      img: features04,
+    },
+    {
+      id: 4,
+      name: "Community Support",
+      title: "Join a vibrant community of learners, exchange ideas, and get help when you need it. Our dedicated support team and forums ensure you're never alone on your coding journey",
+      img: features05,
+    },
+    {
+      id: 5,
+      name: "Career Guidance",
+      title: "Looking to land that dream job in tech? Our courses come with valuable career guidance, including resume reviews, interview tips, and networking opportunities",
+      img: features06,
+    },
+];
+
 
 export default courses;
+export const password = "Shosanboggs7#";

@@ -1,53 +1,13 @@
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
-import { features01, features02, features03, features04, features05, features06 } from "../assets";
-
+import { reasonWhySlide } from "../data";
 
 
 // 🌐 
 
 
 function BulletPoints() {
-  const reasonWhySlide = [
-    {
-      id: 0,
-      name: "Expert Tutoring",
-      title: "Learn from professionals with years of hands-on experience. Our instructors are passionate about guiding you through the ins and outs of programming, ensuring you gain real-world insights",
-      img: features01,
-    },
-    {
-      id: 1,
-      name: "Comprehensive Curriculum",
-      title: "Stay ahead of the curve with a curriculum designed to cover the latest programming languages, frameworks, and industry trends. From Python to JavaScript, we've got you covered",
-      img: features02,
-    },
-    {
-      id: 2,
-      name: "Flexible Learning",
-      title: "Life is busy, and we get it! Our online classes are structured to fit your schedule. Learn at your own pace, from the comfort of your home, and access course materials 24/7",
-      img: features03,
-    },
-    {
-      id: 3,
-      name: "Hands-On Projects",
-      title: "Put theory into practice with engaging, hands-on projects that reinforce your learning. Build a portfolio of impressive projects to showcase your skills to future employers",
-      img: features04,
-    },
-    {
-      id: 4,
-      name: "Community Support",
-      title: "Join a vibrant community of learners, exchange ideas, and get help when you need it. Our dedicated support team and forums ensure you're never alone on your coding journey",
-      img: features05,
-    },
-    {
-      id: 5,
-      name: "Career Guidance",
-      title: "Looking to land that dream job in tech? Our courses come with valuable career guidance, including resume reviews, interview tips, and networking opportunities",
-      img: features06,
-    },
-  ];
-
   const reasonWhySplideOptions = {
     // width: "90%",
     perPage: 4,
@@ -83,16 +43,15 @@ function BulletPoints() {
     },
   };
 
-
   return (
     <>
-      <div className="flex flex-col justify-between items-center bg-white w-full md:h-[400px] sm:h-[500px] 
-        xs:h-[450px] h-[440px]">
+      <div className="flex flex-col justify-between items-center bg-slate-100 w-full md:h-[400px] sm:h-[400px] 
+        xs:h-[350px] h-[330px]">
 
         <div className="flex justify-center items-center">
-          <div className="font-poppins font-semibold text-center md:text-[35px] sm:text-[27px] xs:text-[20px] 
-            text-[17px] xs:w-full w-[92%] mt-[20px]">
-            WHY CHOOSE OUR ONLINE PROGRAMMING CLASSES?
+          <div className="text-center font-semibold sm:text-[30px] xs:text-[25px] text-[18px] 
+            xs:w-full w-[92%] mt-[20px]">
+            Why Choose Our Online Coding Classes?
           </div>
         </div>
 

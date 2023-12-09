@@ -53,24 +53,28 @@ const Home = () => {
                                 Unlock Your Coding Potential with Our Online Programming Classes 
                             </div>
                             <div className="flex flex-wrap justify-center items-center font-poppins font-semibold 
-                                text-primary md:mb-[2%] sm:mb-[8%] xs:mb-[14%] mb-[10%] xs:w-full w-[82%]">
-                                <div className="text-center sm:text-[20px] xs:text-[16px] text-[14px] mr-[10px]">
+                                text-primary md:mb-[2%] sm:mb-[8%] xs:mb-[14%] mb-[7%] xs:w-full w-[90%]">
+
+                                <div className="text-center sm:text-[20px] xs:text-[16px] text-[16px] 
+                                    mr-[10px] xs:tracking-normal tracking-tighter">
                                     Seize this opportunity with a whooping
                                 </div>
                                 <div className="font-poppins font-semibold text-blue-700 
-                                    sm:text-[28px] xs:text-[20px] text-[18px]">
+                                    sm:text-[28px] xs:text-[20px] text-[23px]">
                                     90%
                                 </div>
                                 &nbsp;
-                                <div className="md:w-[230px] sm:w-[230px] xs:w-[180px] w-[160px] 
-                                    md:text-[24px] sm:text-[20px] xs:text-[16px] text-[14px] bg-red-600 
-                                    text-green-800 rounded-[8px] px-2 py-1 bounce-element ml-[6px]">
+                                <div className="text-center md:w-[250px] sm:w-[230px] xs:w-[180px] w-[180px] 
+                                    md:text-[22px] sm:text-[20px] xs:text-[16px] text-[16px] bg-red-600 
+                                    text-green-800 rounded-[8px] px-2 py-1 bounce-element xs:ml-[6px] ml-[3px]">
                                     Christmas discount
                                 </div> 
                                 <div className="text-center sm:text-[20px] xs:text-[16px] text-[17px] ml-[10px]">
                                     on all courses!
                                 </div>
+
                             </div>
+
                             <div className="flex justify-center items-center bg-blue-100 rounded-[10px] 
                                 border-[1px] border-yellow-500 md:w-[20%] sm:w-[30%] xs:w-[35%] w-[45%]">
                                 <div className="font-sans font-bold text-slate-800 sm:text-[26px] 

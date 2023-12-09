@@ -6,7 +6,7 @@ function Intro () {
     return (
         <>
             <div className="flex justify-around items-center w-full md:h-[700px] sm:h-[600px] 
-                xs:h-[500px] h-[600px]">
+                xs:h-[500px] h-[560px]">
 
                 <div className="bg-style w-full h-full flex justify-around items-center">
 
@@ -24,7 +24,8 @@ function Intro () {
                         </div>
                         <div className="flex justify-center items-center sm:w-[40%] xs:w-[75%] w-[88%]">
                             <div className="font-poppins font-semibold sm:text-start text-center 
-                                md:text-[28px] sm:text-[20px] xs:text-[16px] text-[15px] sm:mt-0 mt-[20px]">
+                                md:text-[28px] sm:text-[20px] xs:text-[16px] text-[15px] sm:mt-0 
+                                xs:mt-[20px] mt-[40px]">
                                 Are you ready to embark on a journey of digital mastery? 
                                 Dive into the world of coding with our cutting-edge online programming classes!
                                 <br/> <br className="sm:block xs:hidden block" />
