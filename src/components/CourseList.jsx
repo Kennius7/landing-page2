@@ -57,7 +57,7 @@ function CourseList() {
                             <th className="font-semibold text-start md:text-[22px] sm:text-[19px] 
                                 xs:text-[13px] text-[11px]">New Price</th>
                             <th className="font-semibold text-start md:text-[22px] sm:text-[19px] 
-                                xs:text-[13px] text-[10px]">*Duration</th>
+                                xs:text-[13px] text-[9px]">*Duration</th>
                         </tr>
                     </thead>
                     <tbody className="w-full bg-slate-100">
@@ -77,16 +77,16 @@ function CourseList() {
                                     xs:w-[50%] w-[49%]">
                                     {course.name}
                                 </td>
-                                <td className="font-mono text-start md:text-[20px] sm:text-[16px] xs:text-[14px] text-[12px] 
-                                    xs:w-[15%] w-[20%] line-through italic">
+                                <td className="font-mono text-start md:text-[20px] sm:text-[16px] xs:text-[14px] 
+                                    text-[11px] xs:w-[15%] w-[20%] line-through italic">
                                     N{course.formerPrice}
                                 </td>
-                                <td className="font-mono text-start md:text-[20px] sm:text-[16px] xs:text-[14px] text-[12px] 
-                                    xs:w-[15%] w-[18%] italic">
+                                <td className="font-mono text-start md:text-[20px] sm:text-[16px] xs:text-[14px] 
+                                    text-[11px] xs:w-[15%] w-[18%] italic">
                                     N{course.price}
                                 </td>
-                                <td className="font-poppins text-start md:text-[20px] sm:text-[16px] xs:text-[13px] text-[11px] 
-                                    xs:w-[15%] w-[10%]">
+                                <td className="font-poppins text-start md:text-[20px] sm:text-[16px] 
+                                    xs:text-[13px] text-[10px] xs:w-[15%] w-[11%]">
                                     {course.duration}
                                 </td>
                             </tr>
