@@ -36,10 +36,10 @@ function UserBoard() {
     return (
         <>
             <div className="flex flex-col justify-start items-center w-full h-[100dvh]">
-                <div className="flex justify-between items-center relative w-full h-[50px] 
+                <div className="flex justify-between items-center w-full h-[50px] 
                     bg-slate-200">
 
-                    <div className="flex justify-start items-center ml-[6px] md:w-[94%] xs:w-[90%] w-[87%]">
+                    <div className="flex justify-start items-center ml-[6px] md:w-[94%] xs:w-[90%] w-[86%]">
                         <div className="xs:hidden block bounce-element2">
                             {
                                 menuVisible 
@@ -66,16 +66,16 @@ function UserBoard() {
                         </div>
                     </div>
 
-                    <div className="flex justify-around items-center md:w-[6%] xs:w-[10%] w-[13%]">
+                    <div className="flex justify-around items-center md:w-[6%] xs:w-[10%] w-[14%]">
 
                         <div className={`flex justify-center items-center hover:text-yellow-300 font-bold 
-                            rounded-[50%] duration-500 cursor-pointer bg-red-700 text-blue-300 
-                            xs:p-2 p-0 xs:text-[16px] text-[14px] sm:w-[35px] sm:h-[35px] xs:w-[30px] xs:h-[30px] 
-                            w-[26px] h-[26px]`}>
+                            rounded-[50%] duration-500 cursor-pointer text-center bg-red-700 text-blue-300 
+                            xs:p-2 p-0 xs:text-[16px] text-[13px] sm:w-[35px] sm:h-[35px] 
+                            xs:w-[30px] xs:h-[30px] w-[27px] h-[27px]`}>
                             {"KO" || getUserInitials()}
                         </div>
     
-                        <div className="">
+                        <div className="relative md:w-[20%] sm:w-[25%] xs:w-[30%] w-[35%]">
                             <div className="cursor-pointer">
                                 {
                                     caretVisible 
@@ -89,16 +89,17 @@ function UserBoard() {
                                         onClick={() => setCaretVisible(!caretVisible)} />
                                 }
                             </div>
-                            <div className={`flex flex-col justify-center items-center absolute z-1 top-[105%] 
-                                right-[1%] bg-slate-100 rounded-[7px] w-[13%] 
-                                ${caretVisible ? "block" : "hidden"}`}>
+                            <div className={`flex flex-col justify-center items-center absolute z-[1] top-[200%] 
+                                right-[1%] bg-slate-100 sidebar2 rounded-[7px] sm:w-[170px] xs:w-[140px] 
+                                w-[130px] ${caretVisible ? "block" : "hidden"}`}>
                                 {
                                     rightDropDownData.map((item)=> (
                                         <div 
                                             key={item.id} 
                                             onClick={() => setCheckText(item.name)}
                                             className="cursor-pointer bg-slate-200 rounded-[7px] text-end 
-                                            text-[12px] pr-2 py-[4px] w-[96%] h-[30px] my-1">
+                                            hover:bg-blue-300 sm:text-[12px] xs:text-[11px] text-[10px] 
+                                            pr-2 xs:py-[6px] py-[3px] w-[96%] xs:h-[30px] h-[26px] my-1">
                                             {item.name}
                                         </div>
                                     ))
@@ -110,7 +111,7 @@ function UserBoard() {
                 </div>
 
                 <div className="flex flex-row items-start relative w-full h-[92%]">
-                    <div className={`xs:static absolute z-1 top-0 left-0 sm:w-[20%] xs:w-[30%] w-[50%] h-full 
+                    <div className={`xs:static absolute z-[1] top-0 left-0 sm:w-[20%] xs:w-[30%] w-[50%] h-full 
                         sidebar duration-[2] ${!menuVisible ? "xs:block hidden" : "block"}`}>
                         <UserBoardSide />
                     </div>
