@@ -19,6 +19,8 @@ function App() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
+  const [active, setActive] = useState("Home");
+
 
   useEffect(() => {
     const setExamTimerInterval = setInterval(() => {
@@ -45,7 +47,8 @@ function App() {
 
   return (
     <>
-      <mainContext.Provider value={{ hours, minutes, seconds, days }}>
+      <mainContext.Provider 
+        value={{ hours, minutes, seconds, days, active, setActive }}>
         <BrowserRouter>
           <ScrollToTop/>
           <Routes>

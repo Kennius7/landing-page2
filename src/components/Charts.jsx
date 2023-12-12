@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import Chart from 'chart.js/auto';
+import { mainContext } from "../context/mainContext";
 
 
 
@@ -33,11 +34,15 @@ function Charts() {
   }, []);
 
 
+  const { chartHeading } = useContext(mainContext);
+
 
   return (
     <>
         <div className='w-full h-full'>
-            <h2>Charts</h2>
+          <div>
+            {chartHeading}
+          </div>
             <canvas id="myChart" width="400" height="200"></canvas>
         </div>
     </>

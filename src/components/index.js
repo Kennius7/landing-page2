@@ -11,4 +11,9 @@ export { default as UserBoard } from "./UserBoard";
 export { default as Login } from "./Login";
 export { default as SignUp } from "./SignUp";
 export { default as Requirement } from "./Requirement";
+export { default as UserBoardSide } from "./UserBoardSide";
+export { default as UserContent } from "./UserContent";
+export { default as UserCourses } from "./UserCourses";
+export { default as UserHome } from "./UserHome";
+export { default as UserProfile } from "./UserProfile";
 

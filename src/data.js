@@ -74,6 +74,42 @@ export const reasonWhySlide = [
     },
 ];
 
+export const sideBarData = [
+  {
+    id: 0,
+    name: "Home",
+  },
+  {
+    id: 1,
+    name: "Profile",
+  },
+  {
+    id: 2,
+    name: "Courses",
+  },
+  {
+    id: 3,
+    name: "Content",
+  },
+]
+
+export const rightDropDownData = [
+  {
+    id: 0,
+    name: "Back to Landing Page",
+  },
+  {
+    id: 1,
+    name: "Edit Registration Data",
+  },
+  {
+    id: 2,
+    name: "Sign Out",
+  },
+]
+
+
+
 
 export default courses;
 export const password = "Shosanboggs7#";

@@ -43,7 +43,6 @@ const PaymentPage = () => {
             }
         }
         window.open(whatsappGroupLink, '_blank', 'noreferrer');
-        console.log(whatsappGroupLink);
         Navigate("/login");
     }
 
