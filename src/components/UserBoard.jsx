@@ -10,7 +10,7 @@ import { rightDropDownData } from "../data";
 
 function UserBoard() {
 
-    const { active } = useContext(mainContext);
+    const { active, menuVisible, setMenuVisible } = useContext(mainContext);
     // const [currentlyLoggedInUser] = useAuthState(auth);
     // const [user] = useAuthState(auth);
     // const location = useLocation();
@@ -22,7 +22,6 @@ function UserBoard() {
     // eslint-disable-next-line no-unused-vars
     const [initialsVisible, setInitialsVisible] = useState(false);
     const [caretVisible, setCaretVisible] = useState(false);
-    const [menuVisible, setMenuVisible] = useState(false);
     const [checkText, setCheckText] = useState("Checking...");
 
     const getUserInitials = () => {
@@ -96,7 +95,10 @@ function UserBoard() {
                                     rightDropDownData.map((item)=> (
                                         <div 
                                             key={item.id} 
-                                            onClick={() => setCheckText(item.name)}
+                                            onClick={() => {
+                                                setCheckText(item.name); 
+                                                setCaretVisible(!caretVisible);
+                                            }}
                                             className="cursor-pointer bg-slate-200 rounded-[7px] text-end 
                                             hover:bg-blue-300 sm:text-[12px] xs:text-[11px] text-[10px] 
                                             pr-2 xs:py-[6px] py-[3px] w-[96%] xs:h-[30px] h-[26px] my-1">
@@ -112,7 +114,7 @@ function UserBoard() {
 
                 <div className="flex flex-row items-start relative w-full h-[92%]">
                     <div className={`xs:static absolute z-[1] top-0 left-0 sm:w-[20%] xs:w-[30%] w-[50%] h-full 
-                        sidebar duration-[2] ${!menuVisible ? "xs:block hidden" : "block"}`}>
+                        sidebar duration-1000 ${!menuVisible ? "xs:block hidden" : "block"}`}>
                         <UserBoardSide />
                     </div>
                     <div className="sm:w-[80%] xs:w-[70%] w-full h-[50%]">

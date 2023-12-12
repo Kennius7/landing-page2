@@ -8,7 +8,10 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../FirebaseConfig";
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { AiFillEyeInvisible, AiFillEye, AiOutlineLoading3Quarters } from "react-icons/ai";
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 
 
 
@@ -27,6 +30,7 @@ function Register() {
     const [regData, setRegData] = useState([]);
     const [isEmailUsed, setIsEmailUsed] = useState(false);
     const [submitText, setSubmitText] = useState("Submit");
+    const [isSubmit, setIsSubmit] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const upperCaseRegex = /[A-Z]/;
@@ -71,7 +75,8 @@ function Register() {
     const SignUpTimeOut = () => {
         setTimeout(() => {
             setSubmitText("Submit");
-        }, 3000);
+            setIsSubmit(false);
+        }, 1000);
     }
 
     const handleChange = (e) => {
@@ -168,43 +173,57 @@ function Register() {
     }
 
     const handleSubmit = (e) => {
-        setSubmitText("Submitting...");
-        console.log(formData.name);
+        setIsSubmit(true);
         e.preventDefault();
-        console.log(parseInt(phone.toString().slice(1)));
+        // console.log(parseInt(phone.toString().slice(1)));
 
         if (validateForm()) {
-            createUserWithEmailAndPassword(auth, formData.email, formData.password);
-            // signInWithEmailAndPassword(auth, formData.email, formData.password);
-            console.log(auth);
-            // updateProfile(auth.currentUser, { displayName: formData.name });
             const regDataRef = collection(db, "Registrations");
-            addDoc(regDataRef, {
-                name: formData.name,
-                email: formData.email,
-                password: formData.password,
-                number: parseInt(phone.toString().slice(1)),
-                courses: formData.courses,
-                createdAt: Timestamp.now().toDate(),
-                isPaid: false,
-                regID: generateHighestId(),
-            })
+            // signInWithEmailAndPassword(auth, formData.email, formData.password);
+            // updateProfile(auth.currentUser, { displayName: formData.name });
+            createUserWithEmailAndPassword(auth, formData.email, formData.password)
             .then(() => {
-                console.log("Registration successful");
-                // setSubmitErrors(formSuccessMessage);
-                localStorage.setItem("regDataEmail", formData.email);
-                localStorage.setItem("regDataName", formData.name);
-                localStorage.setItem("regDataAmount", checkCourseAmount());
-                localStorage.setItem("regDataCourses", formData.courses);
-                setTimeout(() => {
-                    setSubmitText("Submit");
-                }, 3000);
-                setTimeout(() => {
-                    Navigate("/payment");
-                }, 5000);
+                addDoc(regDataRef, {
+                    name: formData.name,
+                    email: formData.email,
+                    password: formData.password,
+                    number: parseInt(phone.toString().slice(1)),
+                    courses: formData.courses,
+                    createdAt: Timestamp.now().toDate(),
+                    isPaid: false,
+                    regID: generateHighestId(),
+                })
+                .then(()=>{
+                    console.log("Registration successful");
+                    toast("Registration successful", { type: "success" });
+                    localStorage.setItem("regDataEmail", formData.email);
+                    localStorage.setItem("regDataName", formData.name);
+                    localStorage.setItem("regDataAmount", checkCourseAmount());
+                    localStorage.setItem("regDataCourses", formData.courses);
+                    setTimeout(() => {
+                        setSubmitText("Submit");
+                        setIsSubmit(false);
+                    }, 2000);
+                    setTimeout(() => {
+                        Navigate("/payment");
+                    }, 4000);
+                })
+                .catch(()=>{
+                    console.log("Error Registering");
+                    toast("Error Registering", { type: "error" });
+                    setTimeout(() => {
+                        setSubmitText("Submit");
+                        setIsSubmit(false);
+                    }, 2000);
+                })
             })
             .catch(() => {
-                console.log("Registration Not successful");
+                console.log("Registration Failed");
+                toast("Registration Failed", { type: "error" });
+                setTimeout(() => {
+                    setSubmitText("Submit");
+                    setIsSubmit(false);
+                }, 2000);
             })
         } else {
             console.log("No Registration");
@@ -327,15 +346,24 @@ function Register() {
                             {errors.courses && <p className="text-red-500 text-xs italic mt-2">{errors.courses}</p>}
                         </div>
 
-                        <div className="mt-[50px] text-center">
-                            <button
-                                type="submit"
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold 
-                                    py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            >
-                                {submitText}
-                            </button>
+                        <div className='flex justify-center items-center w-full mt-[50px]'>
+                            <div className="flex justify-center items-center bg-blue-500 
+                                hover:bg-blue-700 focus:bg-blue-700 rounded-[6px] w-[60%] h-[50px]">
+                                {
+                                    !isSubmit
+                                        ?   <button
+                                                type="submit"
+                                                className="text-white font-bold text-center rounded-[6px] 
+                                                focus:outline-none focus:shadow-outline w-full h-full">
+                                                {submitText}
+                                            </button>
+                                        :   <div className='flex justify-center items-center rotate'>
+                                                <AiOutlineLoading3Quarters size={24} color="white" />
+                                            </div>
+                                }
+                            </div>
                         </div>
+                        
                     </form>
                 </div>
             </div>

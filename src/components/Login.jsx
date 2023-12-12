@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { AiFillEyeInvisible, AiFillEye, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
@@ -16,15 +16,16 @@ function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const [loginText, setLoginText] = useState("Sign in");
     const [errors, setErrors] = useState("");
     const [regData, setRegData] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const toastNetworkError = "auth/network-request-failed";
     const toastLoginError1 = "auth/invalid-email";
-    const toastLoginError2 = "Firebase: Error(auth/invalid-email)";
+    const toastLoginError2 = "auth/invalid-login-credentials";
     const appNetworkErrorText = "There was a network error. Check your network.";
     const appLoginErrorText = "Your login credentials are incorrect.";
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
@@ -41,6 +42,32 @@ function Login() {
         })
     }, [])
 
+    const checkCorrectPassword = () => {
+        for (let i = 0; i < regData.length; i++) {
+            if (password !== regData[i].password || regData.length === 0) {
+                console.log("No password matches this email!");
+                return false;
+            }
+            // else {
+            //     console.log("Password exists!")
+            //     return true
+            // }
+        }
+    }
+
+    const checkIfEmailExist = () => {
+        for (let i = 0; i < regData.length; i++) {
+            if (email !== regData[i].email || regData.length === 0) {
+                console.log("This email has not been registered before!");
+                return false;
+            }
+            // else {
+            //     console.log("Email exists!")
+            //     return true
+            // }
+        }
+    }
+
     const toastErrorMessageFunction = (error) => {
         if (error.code === toastNetworkError) {
             return appNetworkErrorText;
@@ -54,47 +81,25 @@ function Login() {
         else return "There was an error while signing in."
     }
 
-    const checkCorrectPassword = () => {
-        for (let i = 0; i < regData.length; i++) {
-            if (password !== regData[i].password) {
-                console.log("No password matches this email!");
-                return false;
-            }
-            else {
-                console.log("Password exists!")
-                return true
-            }
-        }
-    }
-
-    const checkIfEmailExist = () => {
-        for (let i = 0; i < regData.length; i++) {
-            if (email !== regData[i].email) {
-                console.log("This email has not been registered before!");
-                return false;
-            }
-            else {
-                console.log("Email exists!")
-                return true
-            }
-        }
-    }
-
     const SignInTimeOut = () => {
         setTimeout(() => {
-            setLoginText("Sign In");
-        }, 3000);
+            setIsLoggedIn(false);
+        }, 1000);
     }
     const validateForm = () => {
         const errors = {};
+        checkCorrectPassword();
+        checkIfEmailExist();
 
         if (checkIfEmailExist() === false) {
             errors.email = "This email has not been registered before!";
+            checkIfEmailExist();
             SignInTimeOut();
         }
 
         if (checkCorrectPassword() === false) {
             errors.password = "Your password is incorrect!";
+            checkCorrectPassword();
             SignInTimeOut();
         }
 
@@ -120,23 +125,26 @@ function Login() {
     };
 
     const handleLogIn = async () => {
-        setLoginText("Signing in...");
+        checkCorrectPassword();
+        checkIfEmailExist();
+        setIsLoggedIn(true);
 
         if (validateForm()) {
             await signInWithEmailAndPassword(auth, email, password)
             .then(()=>{
                 toast("Sign In successful", { type: "success" });
                 setTimeout(() => {
-                    setLoginText("Sign In");
-                }, 2500);
+                    setIsLoggedIn(false);
+                }, 2000);
                 setTimeout(() => {
                     Navigate("/userboard");
                 }, 3500)
             })
             .catch((error)=>{
+                console.error(error);
                 toast(`${toastErrorMessageFunction(error)}`, { type: "error" });
                 setTimeout(() => {
-                    setLoginText("Sign In");
+                    setIsLoggedIn(false);
                 }, 2500);
             })
         }
@@ -205,13 +213,22 @@ function Login() {
                             {errors.password && <p className="text-red-500 text-xs italic mt-2">{errors.password}</p>}
                         </div>
 
-                        <div className="mt-[50px] text-center">
-                            <button
-                                onClick={handleLogIn}
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold 
-                                py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                {loginText}
-                            </button>
+                        <div className='flex justify-center items-center w-full mt-[50px]'>
+                            <div className="flex justify-center items-center bg-blue-500 
+                                hover:bg-blue-700 focus:bg-blue-700 rounded-[6px] w-[60%] h-[50px]">
+                                {
+                                    !isLoggedIn
+                                        ?   <button 
+                                                onClick={handleLogIn}
+                                                className="text-white font-bold text-center rounded-[6px] 
+                                                focus:outline-none focus:shadow-outline w-full h-full">
+                                                Sign In
+                                            </button>
+                                        :   <div className='flex justify-center items-center rotate'>
+                                                <AiOutlineLoading3Quarters size={24} color="white" />
+                                            </div>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

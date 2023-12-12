@@ -6,7 +6,12 @@ import { mainContext } from "../context/mainContext";
 
 
 function UserBoardSide() {
-    const { active, setActive } = useContext(mainContext);
+    const { active, setActive, setMenuVisible } = useContext(mainContext);
+
+    const handleClick = (name) => {
+        setActive(name);
+        setMenuVisible(false);
+    }
 
 
     return (
@@ -16,7 +21,7 @@ function UserBoardSide() {
                     sideBarData.map((item) => (
                         <div 
                             key={item.id} 
-                            onClick={() => setActive(item.name)}
+                            onClick={() => handleClick(item.name)}
                             className={`flex justify-start items-center cursor-pointer rounded-[6px] 
                             duration-500 xs:w-[96%] w-[96%] sm:h-[40px] h-[33px] my-[4px] pl-[10px] 
                             sm:ml-[6px] ml-[3px] sm:text-[16px] text-[14px]

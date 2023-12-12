@@ -20,6 +20,7 @@ function App() {
   const [seconds, setSeconds] = useState(0);
 
   const [active, setActive] = useState("Home");
+  const [menuVisible, setMenuVisible] = useState(false);
 
 
   useEffect(() => {
@@ -48,7 +49,7 @@ function App() {
   return (
     <>
       <mainContext.Provider 
-        value={{ hours, minutes, seconds, days, active, setActive }}>
+        value={{ hours, minutes, seconds, days, active, setActive, menuVisible, setMenuVisible }}>
         <BrowserRouter>
           <ScrollToTop/>
           <Routes>
