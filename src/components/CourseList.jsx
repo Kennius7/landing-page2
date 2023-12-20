@@ -53,9 +53,9 @@ function CourseList() {
                             <th className="font-semibold text-start md:text-[22px] sm:text-[19px] 
                                 xs:text-[13px] text-[11px] xs:pl-0 pl-[6px]">Course</th>
                             <th className="font-semibold text-start md:text-[22px] sm:text-[19px] 
-                                xs:text-[13px] text-[11px]">Old Price</th>
+                                xs:text-[13px] text-[10px]">Old Price</th>
                             <th className="font-semibold text-start md:text-[22px] sm:text-[19px] 
-                                xs:text-[13px] text-[11px]">New Price</th>
+                                xs:text-[13px] text-[9px]">New Price</th>
                             <th className="font-semibold text-start md:text-[22px] sm:text-[19px] 
                                 xs:text-[13px] text-[9px]">*Duration</th>
                         </tr>
@@ -74,19 +74,19 @@ function CourseList() {
                                     {course.id + 1}
                                 </td>
                                 <td className="text-start md:text-[20px] sm:text-[16px] xs:text-[13px] text-[11px] 
-                                    xs:w-[50%] w-[49%]">
+                                    xs:w-[50%] w-[52%]">
                                     {course.name}
                                 </td>
                                 <td className="font-mono text-start md:text-[20px] sm:text-[16px] xs:text-[14px] 
-                                    text-[11px] xs:w-[15%] w-[20%] line-through italic">
+                                    text-[11px] xs:w-[15%] w-[18%] line-through italic">
                                     N{course.formerPrice}
                                 </td>
                                 <td className="font-mono text-start md:text-[20px] sm:text-[16px] xs:text-[14px] 
-                                    text-[11px] xs:w-[15%] w-[18%] italic">
+                                    text-[11px] xs:w-[15%] w-[16%] italic">
                                     N{course.price}
                                 </td>
                                 <td className="font-poppins text-start md:text-[20px] sm:text-[16px] 
-                                    xs:text-[13px] text-[10px] xs:w-[15%] w-[11%]">
+                                    xs:text-[13px] text-[10px] xs:w-[15%] w-[12%]">
                                     {course.duration}
                                 </td>
                             </tr>
