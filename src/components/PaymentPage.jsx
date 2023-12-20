@@ -129,9 +129,10 @@ const PaymentPage = () => {
                     </div>
                     <div className='flex justify-center items-center sm:w-[50%] xs:w-[55%] w-[60%]'>
                         <PaystackButton 
-                            className='bg-green-500 rounded-[7px] md:py-[3px] sm:py-[10px] 
-                            xs:py-[5px] py-[2px] sm:h-[40px] xs:h-[35px] h-[30px] sm:text-[16px] 
-                            xs:text-[14px] text-[13px] w-full'
+                            className='font-semibold bg-green-700 rounded-[7px] w-full 
+                            md:py-[3px] sm:py-[10px] xs:py-[5px] py-[2px] sm:h-[40px] 
+                            xs:h-[35px] h-[40px] sm:text-[16px] xs:text-[14px] text-[16px] 
+                            xs:tracking-normal tracking-[2px]'
                             {...componentProps} 
                         />
                     </div>
