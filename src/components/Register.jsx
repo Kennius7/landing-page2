@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+// import { mainContext } from "../context/mainContext";
 import { useNavigate } from "react-router-dom";
 import courses from "../data";
 import RegisterHome from "./RegisterHome";
@@ -32,6 +33,7 @@ function Register() {
     const [submitText, setSubmitText] = useState("Submit");
     const [isSubmit, setIsSubmit] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
+    // const { ifLandingLoaded, setIfLandingLoaded } = useContext(mainContext);
 
     const upperCaseRegex = /[A-Z]/;
     const lowerCaseRegex = /[a-z]/;
@@ -172,6 +174,15 @@ function Register() {
         }
     }
 
+    // const paymentNavigator = () => {
+    //     if (ifLandingLoaded) {
+    //         Navigate("/payment");
+    //         setIfLandingLoaded(false);
+    //     } else {
+    //     Navigate("/userboard")
+    //     }
+    // }
+
     const handleSubmit = (e) => {
         setIsSubmit(true);
         e.preventDefault();
@@ -206,6 +217,7 @@ function Register() {
                     }, 2000);
                     setTimeout(() => {
                         Navigate("/payment");
+                        // paymentNavigator();
                     }, 4000);
                 })
                 .catch(()=>{
@@ -361,6 +373,19 @@ function Register() {
                                                 <AiOutlineLoading3Quarters size={24} color="white" />
                                             </div>
                                 }
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className="flex justify-center items-center mt-[20px]">
+                                <div>
+                                    Already registered?&nbsp;
+                                    <span 
+                                        onClick={() => Navigate("/login")} 
+                                        className="text-blue-500 hover:text-blue-700 cursor-pointer">
+                                        Sign In.
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         

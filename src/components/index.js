@@ -16,4 +16,6 @@ export { default as UserContent } from "./UserContent";
 export { default as UserCourses } from "./UserCourses";
 export { default as UserHome } from "./UserHome";
 export { default as UserProfile } from "./UserProfile";
+export { default as RegisterHome } from "./RegisterHome";
+export { default as RegHomeUser } from "./RegHomeUser";
 

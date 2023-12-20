@@ -5,6 +5,7 @@ import { collection, onSnapshot, orderBy, query, doc, updateDoc } from 'firebase
 // import { useAuthState } from "react-firebase-hooks/auth";
 import { db } from "../../FirebaseConfig";
 import logo from "../assets/shosanacodemia-logo111.png";
+import { openWhatsappLink } from "../data";
 
 
 
@@ -43,7 +44,7 @@ const PaymentPage = () => {
             }
         }
         window.open(whatsappGroupLink, '_blank', 'noreferrer');
-        Navigate("/login");
+        // Navigate("/login");
     }
 
     const componentProps = {
@@ -69,14 +70,6 @@ const PaymentPage = () => {
         },
         label: localStoredName,
     };
-
-    const openWhatsappLink = () => {
-        const phoneNumber = '2348055549979';
-        const message = 'Hello, how can we help you?';
-        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappURL, '_blank', 'noreferrer');
-    }
-
 
 
 
@@ -125,7 +118,7 @@ const PaymentPage = () => {
                     Payment Page
                 </div>
 
-                <div className="bg-gray-400 flex justify-center items-center rounded-[10px] 
+                <div className="bg-gray-400 flex flex-col justify-center items-center rounded-[10px] 
                     md:w-[35%] sm:w-[40%] xs:w-[65%] w-[95%] md:mt-[20px] mt-[10px] sm:h-[200px] 
                     xs:h-[200px] h-[200px]">
                     <div className="font-sans font-semibold text-primary text-center p-3 
@@ -133,6 +126,14 @@ const PaymentPage = () => {
                         Hello, {localStoredName}. You are about to pay the sum of&nbsp;
                         <span className="text-green-700">NGN {localStoredAmount}</span>, 
                         in order to complete registration for a {localStoredCourses} course.
+                    </div>
+                    <div className='flex justify-center items-center sm:w-[50%] xs:w-[55%] w-[60%]'>
+                        <PaystackButton 
+                            className='bg-green-500 rounded-[7px] md:py-[3px] sm:py-[10px] 
+                            xs:py-[5px] py-[2px] sm:h-[40px] xs:h-[35px] h-[30px] sm:text-[16px] 
+                            xs:text-[14px] text-[13px] w-full'
+                            {...componentProps} 
+                        />
                     </div>
                 </div>
 

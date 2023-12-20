@@ -21,6 +21,7 @@ function App() {
 
   const [active, setActive] = useState("Home");
   const [menuVisible, setMenuVisible] = useState(false);
+  const [ifLandingLoaded, setIfLandingLoaded] = useState(false);
 
 
   useEffect(() => {
@@ -49,7 +50,8 @@ function App() {
   return (
     <>
       <mainContext.Provider 
-        value={{ hours, minutes, seconds, days, active, setActive, menuVisible, setMenuVisible }}>
+        value={{ hours, minutes, seconds, days, active, setActive, menuVisible, setMenuVisible, 
+        ifLandingLoaded, setIfLandingLoaded }}>
         <BrowserRouter>
           <ScrollToTop/>
           <Routes>

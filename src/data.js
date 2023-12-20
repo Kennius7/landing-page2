@@ -1,7 +1,8 @@
 import { 
     features01, features02, features03, features04, features05, 
     features06, webDesignBasicPics, reactPics, reactNativePics, 
-    nodePics, pythonPics, laptop, power, dataConnect, study } from "./assets";
+    nodePics, pythonPics, laptop, power, dataConnect, study 
+} from "./assets";
 
 
 
@@ -96,18 +97,53 @@ export const sideBarData = [
 export const rightDropDownData = [
   {
     id: 0,
-    name: "Back to Landing Page",
+    name: "Back to Sign In Page",
+    link: "/login",
   },
   {
     id: 1,
     name: "Edit Registration Data",
+    link: "/login",
   },
   {
     id: 2,
+    name: "Join Whatsapp Group",
+    link: "",
+  },
+  {
+    id: 3,
     name: "Sign Out",
+    link: "/login",
   },
 ]
 
+export const openWhatsappLink = () => {
+  const phoneNumber = '2348055549979';
+  const message = 'Hello, how can we help you?';
+  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  window.open(whatsappURL, '_blank', 'noreferrer');
+}
+
+const data = {
+  labels: [
+    'Basic Web Development', 'Front End Development', 
+    'Back End Development', 'Mobile App Development', 'Python',
+  ],
+  datasets: [
+    {
+      label: 'No. of weeks',
+      data: [4, 8, 8, 8, 6 ],
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1,
+    },
+  ],
+};
+
+export const config = {
+  type: 'bar',
+  data: data,
+};
 
 
 

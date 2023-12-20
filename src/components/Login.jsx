@@ -4,9 +4,8 @@ import { AiFillEyeInvisible, AiFillEye, AiOutlineLoading3Quarters } from "react-
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { db } from "../../FirebaseConfig";
+import { db, auth } from "../../FirebaseConfig";
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../FirebaseConfig';
 import RegisterHome from "./RegisterHome";
 
 
@@ -44,27 +43,19 @@ function Login() {
 
     const checkCorrectPassword = () => {
         for (let i = 0; i < regData.length; i++) {
-            if (password !== regData[i].password || regData.length === 0) {
+            if (password !== regData[i].password) {
                 console.log("No password matches this email!");
                 return false;
             }
-            // else {
-            //     console.log("Password exists!")
-            //     return true
-            // }
         }
     }
 
     const checkIfEmailExist = () => {
         for (let i = 0; i < regData.length; i++) {
-            if (email !== regData[i].email || regData.length === 0) {
+            if (email !== regData[i].email) {
                 console.log("This email has not been registered before!");
                 return false;
             }
-            // else {
-            //     console.log("Email exists!")
-            //     return true
-            // }
         }
     }
 
@@ -75,7 +66,7 @@ function Login() {
         if (error.code === toastLoginError1) {
             return appLoginErrorText;
         }
-        if (error.message === toastLoginError2) {
+        if (error.code === toastLoginError2) {
             return appLoginErrorText;
         }
         else return "There was an error while signing in."
@@ -88,18 +79,14 @@ function Login() {
     }
     const validateForm = () => {
         const errors = {};
-        checkCorrectPassword();
-        checkIfEmailExist();
 
         if (checkIfEmailExist() === false) {
             errors.email = "This email has not been registered before!";
-            checkIfEmailExist();
             SignInTimeOut();
         }
 
         if (checkCorrectPassword() === false) {
             errors.password = "Your password is incorrect!";
-            checkCorrectPassword();
             SignInTimeOut();
         }
 
@@ -125,8 +112,6 @@ function Login() {
     };
 
     const handleLogIn = async () => {
-        checkCorrectPassword();
-        checkIfEmailExist();
         setIsLoggedIn(true);
 
         if (validateForm()) {
@@ -157,15 +142,24 @@ function Login() {
                 <div className="w-full">
                     <RegisterHome/>
                 </div>
-                <div className="container mx-auto xs:mt-8 mt-5">
+                <div className="container mx-auto md:mt-4 xs:mt-8 mt-5">
                     <div className="font-poppins font-semibold sm:w-full w-[92%] text-center 
-                        sm:text-[30px] text-[24px] sm:mb-[60px] xs:mb-[40px] mb-[20px] sm:m-4 m-1">
-                        SIGN IN
+                        sm:text-[30px] text-[24px] md:mb-[30px] sm:mb-[60px] xs:mb-[40px] 
+                        mb-[20px] md:m-2 sm:m-4 m-1">
+                        SIGN IN&nbsp;
+                            <div className="flex justify-center items-center text-[16px]">
+                                (&nbsp;Or Enter as a&nbsp;
+                                <div 
+                                    onClick={()=>Navigate("/userboard")} 
+                                    className="text-blue-500 cursor-pointer">
+                                    Guest
+                                </div>&nbsp;)
+                            </div>
                     </div>
 
                     <div className="max-w-md mx-auto">
 
-                        <div className="mb-8">
+                        <div className="mb-6">
                             <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
                                 Email
                             </label>
@@ -228,6 +222,18 @@ function Login() {
                                                 <AiOutlineLoading3Quarters size={24} color="white" />
                                             </div>
                                 }
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex justify-center items-center mt-[20px]">
+                                <div>
+                                    Don&apos;t have an account?&nbsp;
+                                    <span 
+                                        onClick={() => Navigate("/register")} 
+                                        className="text-blue-500 hover:text-blue-700 cursor-pointer">
+                                        Sign Up.
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>

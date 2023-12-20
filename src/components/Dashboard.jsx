@@ -55,21 +55,20 @@ const handlePaidClick = async (data) => {
 
 const handleDelete = async (data) => {
   if (window.confirm(`Are you sure you want to delete this entry: ${data.name}?`)) {
-    try {
       await deleteUser(user)
+      .then(()=>{
         toast("User data deleted successfully", { type: "success", position: toast.POSITION.TOP_RIGHT });
         deleteDoc(doc(db, "Registrations", data.id))
-        .then(()=>{
-          toast("Registration data deleted successfully", { type: "success", position: toast.POSITION.TOP_RIGHT });
-        })
-        .catch((error)=>{
-          toast("Error deleting registration data!", { type: "error", position: toast.POSITION.TOP_RIGHT })
-          console.log(error);
-        })
-    } catch (error) {
-      toast("Error deleting User Data", { type: "error", position: toast.POSITION.TOP_RIGHT })
-      console.error(error);
-    }
+        toast("Registration data deleted successfully", { type: "success", position: toast.POSITION.TOP_RIGHT });
+      })
+      .catch((error)=>{
+        toast("Error deleting user data!", { type: "error", position: toast.POSITION.TOP_RIGHT })
+        console.log(error);
+      })
+    // } catch (error) {
+    //   toast("Error deleting data", { type: "error", position: toast.POSITION.TOP_RIGHT })
+    //   console.error(error);
+    // }
   }
 }
 
@@ -82,7 +81,7 @@ const handleDelete = async (data) => {
             <div>Number of Paid Applicants: {PaidOccurences(regData, "isPaid", true)}</div>
             <div>List of Applicants</div>
             
-            <table className="sm:w-[95%] xs:w-[98%] w-[99%]">
+            <table className="sm:w-[95%] xs:w-[98%] w-[99%] min-h-[100px] bg-slate-100 rounded-[7px]">
               <thead className="w-full">
                   <tr className="bg-blue-200 sm:h-[40px] xs:h-[30px] h-[28px]">
                       <th className="font-semibold text-start sm:text-[15px] xs:text-[11px] text-[9px]">
