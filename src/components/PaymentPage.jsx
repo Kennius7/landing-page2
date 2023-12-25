@@ -133,7 +133,7 @@ const PaymentPage = () => {
                             md:py-[3px] sm:py-[10px] xs:py-[5px] py-[2px] sm:h-[40px] 
                             xs:h-[35px] h-[40px] sm:text-[16px] xs:text-[14px] text-[16px] 
                             xs:tracking-normal tracking-[2px]'
-                            {...componentProps} 
+                            {...componentProps}
                         />
                     </div>
                 </div>
