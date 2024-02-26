@@ -35,8 +35,8 @@ const Home = () => {
                         </div>
                         <div>
                             <div className="text-end sm:text-[16px] xs:text-[13px] text-[10px]">
-                                Registration for January batch <br className={`md:hidden block`}/> 
-                                ends on the 31th of January 2024
+                                Registration for July batch <br className={`md:hidden block`}/> 
+                                ends on the 31th of June 2024
                             </div>
                         </div>
                     </div>
