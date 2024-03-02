@@ -60,14 +60,14 @@ const Home = () => {
                                     Seize this opportunity with a whooping
                                 </div>
                                 <div className="font-poppins font-semibold text-blue-700 
-                                    sm:text-[28px] xs:text-[20px] text-[23px]">
+                                    sm:text-[28px] xs:text-[20px] text-[23px] navText1">
                                     90%
                                 </div>
                                 &nbsp;
                                 <div className="text-center md:w-[250px] sm:w-[230px] xs:w-[180px] w-[180px] 
-                                    md:text-[22px] sm:text-[20px] xs:text-[16px] text-[16px] bg-red-600 
-                                    text-green-800 rounded-[8px] px-2 py-1 bounce-element xs:ml-[6px] ml-[3px]">
-                                    Christmas discount
+                                    md:text-[22px] sm:text-[20px] xs:text-[16px] text-[16px] bg-blue-600 
+                                    text-yellow-400 rounded-[8px] px-2 py-1 bounce-element xs:ml-[6px] ml-[3px]">
+                                    Early Bird discount
                                 </div> 
                                 <div className="text-center sm:text-[20px] xs:text-[16px] text-[17px] ml-[10px]">
                                     on all courses!
