@@ -2,18 +2,42 @@ import { useState, useEffect } from "react";
 import { mainContext } from "./context/mainContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
+import { monthFunct, dayFunct, hourFunct, minuteFunct, secFunct } from "./data";
 import { LandingPage, Register, Dashboard, PaymentPage, UserBoard, Login, SignUp } from "./components";
+import axios from "axios";
 
 
 
 function App() {
-  const timeVariable1 = new Date("06/31/2024 09:00:00");
-  const timeVariable2 = new Date;
-  const timeTodayCounted = timeVariable2.valueOf();
-  const futureCounted = timeVariable1.valueOf();
-  const timeRemaining = (futureCounted - timeTodayCounted)/1000;
-  // const [examTimeLimit, setExamTimeLimit] = useState(timeRemaining);
+  const [DB_SavedDate, setDB_SavedDate] = useState("");
+  const deadlineVariable = new Date(DB_SavedDate);
+  const todayVariable = new Date;
+  const timeTodayCounted = todayVariable.valueOf();
+  let futureCounted = deadlineVariable.valueOf();
+  const fetchTimeout = 3000;
+
+  const [isFetched, setIsFetched] = useState(false);
+
+  const futureUTCDate = new Date(futureCounted);
+  const getHours = futureUTCDate.getHours();
+  const getMinutes = futureUTCDate.getMinutes();
+  const getSeconds = futureUTCDate.getSeconds();
+  const getDay = futureUTCDate.getDate();
+  const getMonth = futureUTCDate.getMonth();
+  const getYear = futureUTCDate.getFullYear();
+  const futureDate = `${monthFunct(getMonth)}/${dayFunct(getDay)}/${getYear} ${hourFunct(getHours)}:${minuteFunct(getMinutes)}:${secFunct(getSeconds)}`;
   
+  const NowUTCDate = new Date;
+  const getNowHours = NowUTCDate.getHours();
+  const getNowMinutes = NowUTCDate.getMinutes();
+  const getNowSeconds = NowUTCDate.getSeconds();
+  const getNowDay = NowUTCDate.getDate();
+  const getNowMonth = NowUTCDate.getMonth();
+  const getNowYear = NowUTCDate.getFullYear();
+  const nowDate = `${monthFunct(getNowMonth)}/${dayFunct(getNowDay)}/${getNowYear} ${hourFunct(getNowHours)}:${minuteFunct(getNowMinutes)}:${secFunct(getNowSeconds)}`;
+
+
+
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -23,35 +47,88 @@ function App() {
   const [menuVisible, setMenuVisible] = useState(false);
   const [ifLandingLoaded, setIfLandingLoaded] = useState(false);
 
+  const ninetyDaysCount = 7776000000;
+  let examTimeLimit = (futureCounted - timeTodayCounted)/1000;
+  // const apiUrlProd = "https://shosan-code-hub-server.netlify.app/.netlify/functions/api/countdown";
+  const apiUrlDev = "http://localhost:3030/countdown";
+
+
+  const fetchDateData = async () => {
+    try {
+      const dateFetch = await axios.get(apiUrlDev);
+      if (dateFetch.data.date === "" 
+        || dateFetch.data.date === null 
+        || dateFetch.data.date === undefined 
+        || dateFetch.data.date === "Invalid date") {
+        setDB_SavedDate(()=>nowDate);
+        console.log("Polling...");
+        setTimeout(() => {fetchDateData()}, fetchTimeout);
+      } else if (dateFetch.data.date !== "" 
+        && dateFetch.data.date !== null 
+        && dateFetch.data.date !== undefined 
+        && dateFetch.data.date !== "Invalid date") {
+        console.log("Document data:", dateFetch.data.date);
+        setDB_SavedDate(()=>dateFetch.data.date);
+        console.log("Success fetching Date...");
+        setIsFetched(true);
+      }
+    } catch (error) {
+      console.log("Error fetching Date...");
+    }
+  }
+
+
+
+  const updateDateFunction = async () => {
+    try {
+      futureCounted = futureCounted + ninetyDaysCount;
+      const updatedFetchedDate = new Date(futureCounted);
+      const getHours = updatedFetchedDate.getHours();
+      const getMinutes = updatedFetchedDate.getMinutes();
+      const getSeconds = updatedFetchedDate.getSeconds();
+      const getDay = updatedFetchedDate.getDate();
+      const getMonth = updatedFetchedDate.getMonth();
+      const getYear = updatedFetchedDate.getFullYear();
+      const updatedFetchedDateFormatted = `${monthFunct(getMonth)}/${dayFunct(getDay)}/${getYear} ${hourFunct(getHours)}:${minuteFunct(getMinutes)}:${secFunct(getSeconds)}`;
+      const updateDateRes = await axios.post(apiUrlDev, { date: updatedFetchedDateFormatted });
+      console.log(`${updateDateRes.data.msg}`);
+      setIsFetched(false);
+      fetchDateData();
+    } catch (error) {
+      console.log("Error updating Current Date:", error)
+    }
+  }
+
 
   useEffect(() => {
+    if (!isFetched) {
+      fetchDateData();
+    }
+
+    if (examTimeLimit < 1) {
+      updateDateFunction();
+    }
+
     const setExamTimerInterval = setInterval(() => {
-        // setExamTimeLimit(() => examTimeLimit - 1);
-        setSeconds(()=>Math.floor(timeRemaining % 86400 % 3600 % 60 ));
-        setMinutes(()=>Math.floor(timeRemaining % 86400 % 3600 / 60));
-        setHours(()=>Math.floor(timeRemaining % 86400 / 3600));
-        setDays(()=>Math.floor(timeRemaining / 86400));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        examTimeLimit = examTimeLimit - 1;
+        setSeconds(()=>Math.floor(examTimeLimit % 60 ));
+        setMinutes(()=>Math.floor((examTimeLimit / 60) % 60));
+        setHours(()=>Math.floor((examTimeLimit / 3600) % 24));
+        setDays(()=>Math.floor(examTimeLimit / 86400));
     }, 1000);
 
 
-    // if (timeRemaining === 0) {
-    //     setExamTimeLimit(0);
-    // }
+    return () => { clearInterval(setExamTimerInterval) }
 
-    return () => {
-        setTimeout(() => {
-            clearInterval(setExamTimerInterval);
-        }, 500);
-    }
-
-}, [timeRemaining])
+  }, [examTimeLimit])
 
 
   return (
     <>
       <mainContext.Provider 
         value={{ hours, minutes, seconds, days, active, setActive, menuVisible, setMenuVisible, 
-        ifLandingLoaded, setIfLandingLoaded }}>
+        ifLandingLoaded, setIfLandingLoaded, futureDate }}>
         <BrowserRouter>
           <ScrollToTop/>
           <Routes>

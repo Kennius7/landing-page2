@@ -1,45 +1,44 @@
 import { useState, useEffect } from 'react';
 // import { mainContext } from "../context/mainContext";
 import { useNavigate } from "react-router-dom";
-import courses from "../data";
+// import courses from "../data";
+import { selectCourses } from '../data';
 import RegisterHome from "./RegisterHome";
 import { Timestamp, addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from "../../FirebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../FirebaseConfig";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "../../FirebaseConfig";
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
-import { AiFillEyeInvisible, AiFillEye, AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 
 
 
 
 function Register() {
-    const Navigate = useNavigate();
+    // eslint-disable-next-line no-unused-vars
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        password: '',
         number: '',
         courses: '',
     });
-    const [phone, setPhone] = useState("");
+
     const [errors, setErrors] = useState({});
     const [regData, setRegData] = useState([]);
     const [isEmailUsed, setIsEmailUsed] = useState(false);
-    const [submitText, setSubmitText] = useState("Submit");
+    // const [submitText, setSubmitText] = useState("Submit");
     const [isSubmit, setIsSubmit] = useState(false);
-    const [passwordVisible, setPasswordVisible] = useState(false);
-    // const { ifLandingLoaded, setIfLandingLoaded } = useContext(mainContext);
-
-    const upperCaseRegex = /[A-Z]/;
-    const lowerCaseRegex = /[a-z]/;
     const numberRegex = /[0-9]/;
-    const specialCharRegex = /[!@#$%^&]/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const apiUrlDev = "http://localhost:3030/send-email";
+    // const apiUrlProd = "";
+    const timeout = 20000;
 
 
     useEffect(() => {
@@ -55,30 +54,31 @@ function Register() {
         })
     }, [])
 
-    const checkCourseAmount = () => {
-        for (let i = 0; i < courses.length; i++) {
-            if (formData.courses === courses[i].name) {
-                console.log(courses[i].price);
-                return courses[i].price;
-            }
-        }
-    }
+    // const checkCourseAmount = () => {
+    //     for (let i = 0; i < courses.length; i++) {
+    //         if (formData.courses === courses[i].name) {
+    //             console.log(courses[i].price);
+    //             return courses[i].price;
+    //         }
+    //     }
+    // }
 
     const checkEmailUsed = () => {
         for (let i = 0; i < regData.length; i++) {
             if (formData.email === regData[i].email) {
                 console.log("This email has been used before!");
                 setIsEmailUsed(true);
-                return isEmailUsed;
-            }
+            } else setIsEmailUsed(false);
         }
     }
 
     const SignUpTimeOut = () => {
         setTimeout(() => {
-            setSubmitText("Submit");
             setIsSubmit(false);
-        }, 1000);
+            setTimeout(() => {
+                setErrors({});
+            }, 10000);
+        }, 2000);
     }
 
     const handleChange = (e) => {
@@ -88,12 +88,15 @@ function Register() {
         });
     };
 
-    const validatePassword = (regex, password) => {
-        const hasRegex = regex.test(password);
-        return hasRegex;
-    }
+    const handleNumberChange = (input) => {
+        setFormData({
+            ...formData,
+            number: input,
+        });
+    };
 
     const validateForm = () => {
+        checkEmailUsed();
         const errors = {};
 
         // Validate name
@@ -108,52 +111,26 @@ function Register() {
             SignUpTimeOut();
         }
 
-        if (checkEmailUsed() === true) {
+        if (isEmailUsed) {
             errors.email = "This email has been used before!";
-            setIsEmailUsed(false);
+            // setIsEmailUsed(false);
             SignUpTimeOut();
         }
 
         // Validate phone number
-        if (!numberRegex.test(parseInt(phone.toString().slice(1)))) {
+        if (!numberRegex.test(parseInt(formData.number.toString().slice(1)))) {
             errors.number = 'Valid number is required';
             SignUpTimeOut();
         }
 
-        if (phone === "" || phone === "+234") {
-            errors.number = 'Please type in a Phone number';
+        if (formData.number === "" || formData.number === "+234") {
+            errors.number = 'Please type in a phone number';
             SignUpTimeOut();
         }
 
         // Validate course selection
-        if (formData.courses === "") {
+        if (formData.courses === "" || formData.courses === "Select a course") {
             errors.courses = 'Please select a course';
-            SignUpTimeOut();
-        }
-
-        // Validate Password input
-        if  (formData.password.length < 8) {
-            errors.password = "Password must be at least 8 characters";
-            SignUpTimeOut();
-        }
-        if (!validatePassword(lowerCaseRegex, formData.password)) {
-            errors.password = "Password must have small letters";
-            SignUpTimeOut();
-        }
-        if (!validatePassword(upperCaseRegex, formData.password)) {
-            errors.password = "Password must have capital letters";
-            SignUpTimeOut();
-        }
-        if (!validatePassword(numberRegex, formData.password)) {
-            errors.password = "Password must have numbers";
-            SignUpTimeOut();
-        }
-        if (!validatePassword(specialCharRegex, formData.password)) {
-            errors.password = "Password must have special characters";
-            SignUpTimeOut();
-        }
-        if  (formData.password === "") {
-            errors.password = "Please select a password";
             SignUpTimeOut();
         }
 
@@ -174,31 +151,43 @@ function Register() {
         }
     }
 
-    // const paymentNavigator = () => {
-    //     if (ifLandingLoaded) {
-    //         Navigate("/payment");
-    //         setIfLandingLoaded(false);
-    //     } else {
-    //     Navigate("/userboard")
-    //     }
-    // }
+    const sendEmailForm = async () => {
+        try {
+            const response = await axios.post(apiUrlDev, formData, { timeout })
+            console.log(`${response.data.emailMessage}`);
+            toast(response.data.formMessage, { type: "success" });
+            setTimeout(() => setIsSubmit(false), 4000);
+        } catch (error) {
+            if (error.code === "ECONNABORTED") {
+                console.error(`Sending took too long: ${error}`);
+                toast(error.data.timeoutMessage, { type: "error" });
+                setTimeout(() => setIsSubmit(false), 4000);
+            } else {
+                setIsSubmit(false);
+                console.error(`Email sending failed: ${error}`);
+                toast(error.data.errorMessage, { type: "error" });
+                setTimeout(() => setIsSubmit(false), 4000);
+            }
+        }
+    }
+
+
+
+
 
     const handleSubmit = (e) => {
         setIsSubmit(true);
         e.preventDefault();
-        // console.log(parseInt(phone.toString().slice(1)));
+        console.log(formData);
 
         if (validateForm()) {
-            const regDataRef = collection(db, "Registrations");
-            // signInWithEmailAndPassword(auth, formData.email, formData.password);
-            // updateProfile(auth.currentUser, { displayName: formData.name });
-            createUserWithEmailAndPassword(auth, formData.email, formData.password)
-            .then(() => {
+            if (navigator.onLine) {
+                console.log("App online");
+                const regDataRef = collection(db, "Registrations");
                 addDoc(regDataRef, {
                     name: formData.name,
                     email: formData.email,
-                    password: formData.password,
-                    number: parseInt(phone.toString().slice(1)),
+                    number: parseInt(formData.number.toString().slice(1)),
                     courses: formData.courses,
                     createdAt: Timestamp.now().toDate(),
                     isPaid: false,
@@ -207,36 +196,25 @@ function Register() {
                 .then(()=>{
                     console.log("Registration successful");
                     toast("Registration successful", { type: "success" });
-                    localStorage.setItem("regDataEmail", formData.email);
-                    localStorage.setItem("regDataName", formData.name);
-                    localStorage.setItem("regDataAmount", checkCourseAmount());
-                    localStorage.setItem("regDataCourses", formData.courses);
-                    setTimeout(() => {
-                        setSubmitText("Submit");
-                        setIsSubmit(false);
-                    }, 2000);
-                    setTimeout(() => {
-                        Navigate("/payment");
-                        // paymentNavigator();
-                    }, 4000);
+                    sendEmailForm();
+                    setTimeout(() => { setIsSubmit(false) }, 2000);
                 })
-                .catch(()=>{
-                    console.log("Error Registering");
+                .catch((error)=>{
+                    console.log("Error Registering", error);
                     toast("Error Registering", { type: "error" });
                     setTimeout(() => {
-                        setSubmitText("Submit");
                         setIsSubmit(false);
                     }, 2000);
                 })
-            })
-            .catch(() => {
-                console.log("Registration Failed");
-                toast("Registration Failed", { type: "error" });
+
+            }
+            if (!navigator.onLine) {
+                console.log("App offline");
+                toast("It seems you're offline", { type: "warning" });
                 setTimeout(() => {
-                    setSubmitText("Submit");
                     setIsSubmit(false);
                 }, 2000);
-            })
+            }
         } else {
             console.log("No Registration");
         }
@@ -244,118 +222,143 @@ function Register() {
 
     return (
         <>
-            <div className="flex flex-col justify-start items-center w-full h-[1300px]">
+            <div className="flex flex-col justify-start items-center w-full h-[1100px]">
                 <div className="w-full">
                     <RegisterHome/>
                 </div>
-                <div className="container mx-auto mt-8">
-                    <div className="font-poppins font-semibold w-full text-center text-[30px] mb-[60px] m-4">
+                <div className="w-[35%] mt-[60px]">
+                    <div className="font-poppins font-semibold w-full text-center text-[30px] 
+                        mb-[50px] m-4">
                         REGISTRATION
                     </div>
-                    <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
-                        <div className="mb-4">
-                            <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+                    <form 
+                        className="w-full" 
+                        onSubmit={handleSubmit}>
+
+                        <div className="w-full mb-[30px]">
+                            <label 
+                                htmlFor="name" 
+                                className="text-gray-700 text-[16px] font-semibold">
                                 Name
                             </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder="John Doe"
-                                value={formData.name}
-                                onChange={handleChange}
-                                className={`w-full px-3 py-2 border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded`}
-                            />
-                            {errors.name && <p className="text-red-500 text-xs italic mt-2">{errors.name}</p>}
-                        </div>
-
-                        <div className="mb-4">
-                            <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
-                                Email
-                            </label>
-                            <input
-                                type="text"
-                                id="email"
-                                name="email"
-                                placeholder="johndoe@email.com"
-                                value={formData.email}
-                                onChange={handleChange}
-                                className={`w-full px-3 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded`}
-                            />
-                            {errors.email && <p className="text-red-500 text-xs italic mt-2">{errors.email}</p>}
-                        </div>
-
-                        <div className="mb-4 relative">
-                            <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
-                                Password
-                            </label>
-                            <input
-                                type={passwordVisible ? "text" : "password"}
-                                id="password"
-                                name="password"
-                                placeholder="Password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                className={`w-full px-3 py-2 border 
-                                ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded`}
-                            />
-                            {
-                                passwordVisible 
-                                ? <span 
-                                    className={`cursor-pointer absolute z-[1] right-[2%] top-[52%] 
-                                    opacity-40 ${errors.password && '-mt-[12px]'}`}
-                                    onClick={() => {setPasswordVisible(!passwordVisible)}}>
-                                    <AiFillEye name="eye" size={24} color="black" />
-                                    </span> 
-                                : <span 
-                                    className={`cursor-pointer absolute z-[1] right-[2%] top-[52%] 
-                                    opacity-40 ${errors.password && '-mt-[12px]'}`}
-                                    onClick={() => {setPasswordVisible(!passwordVisible)}}>
-                                    <AiFillEyeInvisible name="eye-with-line" size={24} color="black" />
-                                    </span> 
-                            }
-                            {errors.password && <p className="text-red-500 text-xs italic mt-2">{errors.password}</p>}
-                        </div>
-
-                        <div className="mb-4">
-                            <label 
-                                htmlFor="countryCode" 
-                                className="block text-gray-700 text-sm font-bold mb-2">
-                                Phone Number
-                            </label>
-                            <div className='w-full'>
-                                <PhoneInput
-                                    defaultCountry="ng"
-                                    name="number"
-                                    value={phone}
-                                    onChange={(phone) => setPhone(phone)} 
-                                    inputStyle={{width: "100%", backgroundColour: "green"}}
+                            <div className="w-full h-[50px]">
+                                <input type="text" id="name" name="name" 
+                                    placeholder="Eg. John Doe"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    className={`font-sans text-[16px] w-full h-[85%] pl-2 
+                                    border rounded-[6px] placeholder:italic placeholder:text-[16px]
+                                    ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
                                 />
-                                {errors.number && <p className="text-red-500 text-xs italic mt-2">{errors.number}</p>}
+                                {
+                                    errors.name 
+                                        &&  <p className="font-sans text-red-500 text-[15px] italic 
+                                            w-full h-[15%] pl-1">
+                                                {errors.name}
+                                            </p>
+                                }
                             </div>
                         </div>
 
-                        <div className="mb-4">
-                            <label htmlFor="courses" className="block text-gray-700 text-sm font-bold mb-2">
+                        <div className="w-full mb-[30px]">
+                            <label 
+                                htmlFor="email" 
+                                className="text-gray-700 text-[16px] font-semibold">
+                                Email
+                            </label>
+                            <div className="w-full h-[50px]">
+                                <input type="text" id="email" name="email"
+                                    placeholder="Eg. johndoe@email.com"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    className={`font-sans text-[16px] w-full h-[85%] pl-2 
+                                    border rounded-[6px] placeholder:italic placeholder:text-[16px]
+                                    ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                                />
+                                {
+                                    errors.email 
+                                        && 
+                                        <p className="font-sans text-red-500 text-[15px] italic 
+                                        w-full h-[15%] pl-1">
+                                            {errors.email}
+                                        </p>
+                                }
+                            </div>
+                        </div>
+
+                        <div className="w-full mb-[30px]">
+                            <label 
+                                htmlFor="number" 
+                                className="text-gray-700 text-[16px] font-semibold">
+                                Phone Number
+                            </label>
+                            <div className="w-full h-[50px]">
+                                <PhoneInput
+                                    defaultCountry="ng"
+                                    type="number"
+                                    id="number"
+                                    inputProps={{
+                                        name: "number" ,
+                                        placeholder: "Include country code, Eg. +23470222...", 
+                                        maxLength: 15
+                                    }}
+                                    value={formData.number}
+                                    onChange={handleNumberChange} 
+                                    className={`outline-none rounded-[6px] border font-sans 
+                                    text-[16px] w-full h-[85%] placeholder:italic placeholder:text-[16px]
+                                    ${errors.number ? 'border-red-500' : 'border-gray-300'}`}
+                                    inputStyle={{
+                                        width: "100%", 
+                                        height: "100%",
+                                        borderTopRightRadius: "6px",
+                                        borderBottomRightRadius: "6px",
+                                        outline: 0
+                                    }}
+                                />
+                                {
+                                    errors.number 
+                                        && 
+                                        <p className="font-sans text-red-500 text-[15px] italic 
+                                        w-full h-[15%] pl-1">
+                                            {errors.number}
+                                        </p>
+                                }
+                            </div>
+                        </div>
+
+                        <div className="w-full mb-[30px]">
+                            <label 
+                                htmlFor="courses" 
+                                className="text-gray-700 text-[16px] font-semibold">
                                 Select a course
                             </label>
-                            <select
-                                name="courses"
-                                value={formData.courses}
-                                onChange={handleChange}
-                                className={`border p-2 rounded-[4px] w-full
-                                    ${errors.courses ? 'border-red-500' : 'border-gray-300'}`}
-                            >
-                                {courses.map(course => (
-                                    <option 
-                                        key={course.id} 
-                                        value={course.name}
-                                    >
-                                        {course.name}
-                                    </option>
-                                ))}
-                            </select>
-                            {errors.courses && <p className="text-red-500 text-xs italic mt-2">{errors.courses}</p>}
+                            <div className="w-full h-[50px]">
+                                <select
+                                    name="courses"
+                                    value={formData.courses}
+                                    onChange={handleChange}
+                                    className={`font-sans text-[18px] italic w-full h-[85%] pl-2 
+                                    border rounded-[6px] text-slate-600
+                                        ${errors.courses ? 'border-red-500' : 'border-gray-300'}`}
+                                >
+                                    {selectCourses.map(course => (
+                                        <option 
+                                            key={course.id} 
+                                            value={course.name}
+                                        >
+                                            {course.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                {
+                                    errors.courses 
+                                        && <p className="font-sans text-red-500 text-[15px] italic 
+                                            w-full h-[15%] pl-1">
+                                                {errors.courses}
+                                            </p>
+                                }
+                            
+                            </div>
                         </div>
 
                         <div className='flex justify-center items-center w-full mt-[50px]'>
@@ -367,7 +370,7 @@ function Register() {
                                                 type="submit"
                                                 className="text-white font-bold text-center rounded-[6px] 
                                                 focus:outline-none focus:shadow-outline w-full h-full">
-                                                {submitText}
+                                                Submit
                                             </button>
                                         :   <div className='flex justify-center items-center rotate'>
                                                 <AiOutlineLoading3Quarters size={24} color="white" />
@@ -376,19 +379,6 @@ function Register() {
                             </div>
                         </div>
 
-                        <div>
-                            <div className="flex justify-center items-center mt-[20px]">
-                                <div>
-                                    Already registered?&nbsp;
-                                    <span 
-                                        onClick={() => Navigate("/login")} 
-                                        className="text-blue-500 hover:text-blue-700 cursor-pointer">
-                                        Sign In.
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        
                     </form>
                 </div>
             </div>

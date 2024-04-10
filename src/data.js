@@ -145,7 +145,143 @@ export const config = {
   data: data,
 };
 
+export const selectCourses = [
+  { id: 0, name: 'Select a course' },
+  { id: 1, name: 'Web Design Basics' },
+  { id: 2, name: 'Front End Development (React)' },
+  { id: 3, name: 'Back End Development (Node.js)' },
+  { id: 4, name: 'Mobile App Development (React Native)' },
+  { id: 5, name: 'Python' },
+];
 
 
 export default courses;
 export const password = "Shosanboggs7#";
+
+
+
+export const getdateNumber = (dateString) => {
+  const dateNumber = new Date(dateString).getUTCDate();
+  return dateNumber;
+}
+
+export const getFullDayFunction = (dateString) => {
+  const dayStringData = new Date(dateString).toUTCString();
+  const isSundayIncluded = dayStringData.includes("Sun");
+  const isMondayIncluded = dayStringData.includes("Mon");
+  const isTuesdayIncluded = dayStringData.includes("Tue");
+  const isWednesdayIncluded = dayStringData.includes("Wed");
+  const isThursdayIncluded = dayStringData.includes("Thu");
+  const isFridayIncluded = dayStringData.includes("Fri");
+  const isSaturdayIncluded = dayStringData.includes("Sat");
+  if (isSundayIncluded) {
+      return "Sunday";
+  }
+  if (isMondayIncluded) {
+      return "Monday";
+  }
+  if (isTuesdayIncluded) {
+      return "Tuesday";
+  }
+  if (isWednesdayIncluded) {
+      return "Wednesday";
+  }
+  if (isThursdayIncluded) {
+      return "Thursday";
+  }
+  if (isFridayIncluded) {
+      return "Friday";
+  }
+  if (isSaturdayIncluded) {
+      return "Saturday";
+  }
+}
+
+export const getFullMonthFunction = (dateString) => {
+  const monthStringData = new Date(dateString).toUTCString();
+  const isJanuaryIncluded = monthStringData.includes("Jan");
+  const isFebruaryIncluded = monthStringData.includes("Feb");
+  const isMarchIncluded = monthStringData.includes("Mar");
+  const isAprilIncluded = monthStringData.includes("Apr");
+  const isMayIncluded = monthStringData.includes("May");
+  const isJuneIncluded = monthStringData.includes("Jun");
+  const isJulyIncluded = monthStringData.includes("Jul");
+  const isAugustIncluded = monthStringData.includes("Aug");
+  const isSeptemberIncluded = monthStringData.includes("Sep");
+  const isOctoberIncluded = monthStringData.includes("Oct");
+  const isNovemberIncluded = monthStringData.includes("Nov");
+  const isDecemberIncluded = monthStringData.includes("Dec");
+  if (isJanuaryIncluded) {
+      return "January";
+  }
+  if (isFebruaryIncluded) {
+      return "February";
+  }
+  if (isMarchIncluded) {
+      return "March";
+  }
+  if (isAprilIncluded) {
+      return "April";
+  }
+  if (isMayIncluded) {
+      return "May";
+  }
+  if (isJuneIncluded) {
+      return "June";
+  }
+  if (isJulyIncluded) {
+      return "July";
+  }
+  if (isAugustIncluded) {
+      return "August";
+  }
+  if (isSeptemberIncluded) {
+      return "September";
+  }
+  if (isOctoberIncluded) {
+      return "October";
+  }
+  if (isNovemberIncluded) {
+      return "November";
+  }
+  if (isDecemberIncluded) {
+      return "December";
+  }
+}
+
+export const getYear = (dateString) => {
+  const fullYear = new Date(dateString).getUTCFullYear();
+  return fullYear;
+}
+
+export const monthFunct = (mon) => {
+  if (mon <= 9) {
+      return `0${mon + 1}`;
+  } else return mon;
+}
+
+export const dayFunct = (day) => {
+  if (day <= 9) {
+      return `0${day}`;
+  } else return day;
+}
+
+export const hourFunct = (hr) => {
+  if (hr <= 9) {
+      return `0${hr}`;
+  } else return hr;
+}
+
+export const minuteFunct = (min) => {
+  if (min <= 9) {
+      return `0${min}`;
+  } else return min;
+}
+
+export const secFunct = (sec) => {
+  if (sec <= 9) {
+      return `0${sec}`;
+  } else return sec;
+}
+
+
