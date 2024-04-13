@@ -1,7 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { mainContext } from "../context/mainContext";
-import { useNavigate } from "react-router-dom";
-// import courses from "../data";
 import { selectCourses } from '../data';
 import RegisterHome from "./RegisterHome";
 import { Timestamp, addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore';
@@ -20,8 +17,6 @@ import axios from "axios";
 
 
 function Register() {
-    // eslint-disable-next-line no-unused-vars
-    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -31,28 +26,43 @@ function Register() {
 
     const [errors, setErrors] = useState({});
     const [regData, setRegData] = useState([]);
+    // eslint-disable-next-line no-unused-vars
     const [isEmailUsed, setIsEmailUsed] = useState(false);
-    // const [submitText, setSubmitText] = useState("Submit");
     const [isSubmit, setIsSubmit] = useState(false);
+    const [isPolling, setIsPolling] = useState(false);
     const numberRegex = /[0-9]/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const apiUrlDev = "http://localhost:3030/send-email";
-    // const apiUrlProd = "";
+    // const apiUrlDev = "http://localhost:3030/send-email";
+    const apiUrlProd = "https://shosan-code-hub-server.netlify.app/.netlify/functions/api/send-email";
     const timeout = 20000;
 
 
     useEffect(() => {
-        const regDataRef = collection(db, "Registrations");
-        const q = query(regDataRef, orderBy("createdAt", "desc"));
-    
-        onSnapshot(q, (snapshot) => {
-            const regDataFireBase = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-            }));
-            setRegData(regDataFireBase);
-        })
-    }, [])
+        const fetchRegData = () => {
+            const regDataRef = collection(db, "Registrations");
+            const q = query(regDataRef, orderBy("createdAt", "desc"));
+            onSnapshot(q, (snapshot) => {
+                const regDataFireBase = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+                }));
+                setRegData(regDataFireBase);
+                setIsPolling(!isPolling);
+            })
+        }
+
+        if (regData.length === 0) {
+            setTimeout(() => {
+                fetchRegData();
+                console.log(`Reg Data polling...`)
+            }, 3000);
+        }
+
+        if (regData.length !== 0) {
+            const regDataFetch = regData.length === 0 ? "None" : regData;
+            console.log(`Registration data fetched: ${regDataFetch[0].name}`);
+        }
+    }, [regData, isPolling])
 
     // const checkCourseAmount = () => {
     //     for (let i = 0; i < courses.length; i++) {
@@ -68,10 +78,14 @@ function Register() {
             if (formData.email === regData[i].email) {
                 console.log("This email has been used before!");
                 setIsEmailUsed(true);
-            } else setIsEmailUsed(false);
+                return isEmailUsed;
+            } else {
+                setIsEmailUsed(false);
+                return isEmailUsed;
+            }
         }
     }
-
+    
     const SignUpTimeOut = () => {
         setTimeout(() => {
             setIsSubmit(false);
@@ -94,9 +108,9 @@ function Register() {
             number: input,
         });
     };
-
+    
+    // checkEmailUsed();
     const validateForm = () => {
-        checkEmailUsed();
         const errors = {};
 
         // Validate name
@@ -111,9 +125,8 @@ function Register() {
             SignUpTimeOut();
         }
 
-        if (isEmailUsed) {
+        if (checkEmailUsed() === true) {
             errors.email = "This email has been used before!";
-            // setIsEmailUsed(false);
             SignUpTimeOut();
         }
 
@@ -153,19 +166,20 @@ function Register() {
 
     const sendEmailForm = async () => {
         try {
-            const response = await axios.post(apiUrlDev, formData, { timeout })
+            const response = await axios.post(apiUrlProd, formData, { timeout })
             console.log(`${response.data.emailMessage}`);
             toast(response.data.formMessage, { type: "success" });
             setTimeout(() => setIsSubmit(false), 4000);
         } catch (error) {
+            console.log(error);
             if (error.code === "ECONNABORTED") {
                 console.error(`Sending took too long: ${error}`);
-                toast(error.data.timeoutMessage, { type: "error" });
+                toast(error.data.data.timeoutMessage, { type: "error" });
                 setTimeout(() => setIsSubmit(false), 4000);
             } else {
                 setIsSubmit(false);
                 console.error(`Email sending failed: ${error}`);
-                toast(error.data.errorMessage, { type: "error" });
+                toast(error.data.data.errorMessage, { type: "error" });
                 setTimeout(() => setIsSubmit(false), 4000);
             }
         }
@@ -194,9 +208,9 @@ function Register() {
                     regID: generateHighestId(),
                 })
                 .then(()=>{
+                    sendEmailForm();
                     console.log("Registration successful");
                     toast("Registration successful", { type: "success" });
-                    sendEmailForm();
                     setTimeout(() => { setIsSubmit(false) }, 2000);
                 })
                 .catch((error)=>{

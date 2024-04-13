@@ -49,13 +49,13 @@ function App() {
 
   const ninetyDaysCount = 7776000000;
   let examTimeLimit = (futureCounted - timeTodayCounted)/1000;
-  // const apiUrlProd = "https://shosan-code-hub-server.netlify.app/.netlify/functions/api/countdown";
-  const apiUrlDev = "http://localhost:3030/countdown";
+  const apiUrlProd = "https://shosan-code-hub-server.netlify.app/.netlify/functions/api/countdown";
+  // const apiUrlDev = "http://localhost:3030/countdown";
 
 
   const fetchDateData = async () => {
     try {
-      const dateFetch = await axios.get(apiUrlDev);
+      const dateFetch = await axios.get(apiUrlProd);
       if (dateFetch.data.date === "" 
         || dateFetch.data.date === null 
         || dateFetch.data.date === undefined 
@@ -90,7 +90,7 @@ function App() {
       const getMonth = updatedFetchedDate.getMonth();
       const getYear = updatedFetchedDate.getFullYear();
       const updatedFetchedDateFormatted = `${monthFunct(getMonth)}/${dayFunct(getDay)}/${getYear} ${hourFunct(getHours)}:${minuteFunct(getMinutes)}:${secFunct(getSeconds)}`;
-      const updateDateRes = await axios.post(apiUrlDev, { date: updatedFetchedDateFormatted });
+      const updateDateRes = await axios.post(apiUrlProd, { date: updatedFetchedDateFormatted });
       console.log(`${updateDateRes.data.msg}`);
       setIsFetched(false);
       fetchDateData();
@@ -121,14 +121,14 @@ function App() {
 
     return () => { clearInterval(setExamTimerInterval) }
 
-  }, [examTimeLimit])
+  }, [examTimeLimit, DB_SavedDate])
 
 
   return (
     <>
       <mainContext.Provider 
         value={{ hours, minutes, seconds, days, active, setActive, menuVisible, setMenuVisible, 
-        ifLandingLoaded, setIfLandingLoaded, futureDate }}>
+        ifLandingLoaded, setIfLandingLoaded, futureDate, examTimeLimit }}>
         <BrowserRouter>
           <ScrollToTop/>
           <Routes>

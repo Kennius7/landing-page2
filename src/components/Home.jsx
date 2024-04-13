@@ -2,12 +2,14 @@ import backgroundPics from "../assets/home-bg.webp";
 import logo from "../assets/shosanacodemia-logo111.png";
 import { useContext } from "react";
 import { mainContext } from "../context/mainContext";
-// import RegisterButton from "./RegisterButton";
+import { TimerBox } from "./TimerBox";
+import { getFullDayFunction, getFullMonthFunction, getYear, getdateNumber } from "../data";
+
 
 
 
 const Home = () => {
-    const { days, hours, minutes, seconds } = useContext(mainContext);
+    const { days, hours, minutes, seconds, examTimeLimit, futureDate } = useContext(mainContext);
     // 🚀🚀🚀
 
     return (
@@ -34,10 +36,24 @@ const Home = () => {
                             </div>
                         </div>
                         <div>
-                            <div className="text-end sm:text-[16px] xs:text-[13px] text-[10px]">
-                                Registration for July batch <br className={`md:hidden block`}/> 
-                                ends on the 31th of June 2024
-                            </div>
+                            {
+                                examTimeLimit < 2 || examTimeLimit === null || isNaN(examTimeLimit) 
+                                ?   <div className="font-sans font-semibold text-end md:text-[18px] 
+                                        sm:text-[17px] xs:text-[13px] text-[11px] text-slate-800 
+                                        italic sm:leading-normal xs:leading-[16px] 
+                                        leading-[13px]">
+                                        Our next online class commencing date will be communicated soon.
+                                    </div> 
+                                :   <div className="font-sans font-semibold text-end md:text-[18px] 
+                                        sm:text-[17px] xs:text-[13px] text-[11px] text-slate-800 
+                                        italic sm:leading-normal xs:leading-[16px] 
+                                        leading-[13px]">
+                                        Our next online class commencing date is on {getFullDayFunction(futureDate)},&nbsp;
+                                        <br className={`md:hidden block`}/>
+                                        the {getdateNumber(futureDate)}th 
+                                        of {getFullMonthFunction(futureDate)}, {getYear(futureDate)}&nbsp;
+                                    </div>
+                            }
                         </div>
                     </div>
 
@@ -93,10 +109,7 @@ const Home = () => {
                                     <div className="flex justify-center items-center bg-primary box-shadow 
                                         border-yellow-400 border-[1px] rounded-[20%] sm:w-[100px] 
                                         sm:h-[100px] xs:w-[70px] xs:h-[70px] w-[60px] h-[60px]">
-                                        <span className="font-poppins font-semibold text-white 
-                                            text-center sm:text-[40px] xs:text-[24px] text-[25px]">
-                                            {days}
-                                        </span>
+                                        <TimerBox timeLimit={examTimeLimit} timeSegment={days}/>
                                     </div>
                                     <span className="flex justify-center items-center font-bold 
                                         sm:text-[18px] xs:text-[13px] text-[12px] mt-[10px]">
@@ -108,10 +121,7 @@ const Home = () => {
                                     <div className="flex justify-center items-center bg-primary box-shadow 
                                         border-yellow-400 border-[1px] rounded-[20%] sm:w-[100px] 
                                         sm:h-[100px] xs:w-[70px] xs:h-[70px] w-[60px] h-[60px]">
-                                        <span className="font-poppins font-semibold text-white 
-                                            text-center sm:text-[40px] xs:text-[24px] text-[25px]">
-                                            {hours}
-                                        </span>
+                                        <TimerBox timeLimit={examTimeLimit} timeSegment={hours}/>
                                     </div>
                                     <span className="flex justify-center items-center font-bold 
                                         sm:text-[18px] xs:text-[13px] text-[12px] mt-[10px]">
@@ -123,10 +133,7 @@ const Home = () => {
                                     <div className="flex justify-center items-center bg-primary box-shadow 
                                         border-yellow-400 border-[1px] rounded-[20%] sm:w-[100px] 
                                         sm:h-[100px] xs:w-[70px] xs:h-[70px] w-[60px] h-[60px]">
-                                        <span className="font-poppins font-semibold text-white 
-                                            text-center sm:text-[40px] xs:text-[24px] text-[25px]">
-                                            {minutes}
-                                        </span>
+                                        <TimerBox timeLimit={examTimeLimit} timeSegment={minutes}/>
                                     </div>
                                     <span className="flex justify-center items-center font-bold 
                                         sm:text-[18px] xs:text-[13px] text-[12px] mt-[10px]">
@@ -138,10 +145,7 @@ const Home = () => {
                                     <div className="flex justify-center items-center bg-primary box-shadow 
                                         border-yellow-400 border-[1px] rounded-[20%] sm:w-[100px] 
                                         sm:h-[100px] xs:w-[70px] xs:h-[70px] w-[60px] h-[60px]">
-                                        <span className="font-poppins font-semibold text-white 
-                                            text-center sm:text-[40px] xs:text-[24px] text-[25px]">
-                                            {seconds}
-                                        </span>
+                                        <TimerBox timeLimit={examTimeLimit} timeSegment={seconds}/>
                                     </div>
                                     <span className="flex justify-center items-center font-bold 
                                         sm:text-[18px] xs:text-[13px] text-[12px] mt-[10px]">
