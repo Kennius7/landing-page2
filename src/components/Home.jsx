@@ -42,14 +42,17 @@ const Home = () => {
                                         sm:text-[17px] xs:text-[13px] text-[11px] text-slate-800 
                                         italic sm:leading-normal xs:leading-[16px] 
                                         leading-[13px]">
-                                        Our next online class commencing date will be communicated soon.
+                                        Our next online class commencing
+                                        <br className="sm:hidden block"/>
+                                        &nbsp;date will be communicated soon.
                                     </div> 
                                 :   <div className="font-sans font-semibold text-end md:text-[18px] 
                                         sm:text-[17px] xs:text-[13px] text-[11px] text-slate-800 
                                         italic sm:leading-normal xs:leading-[16px] 
-                                        leading-[13px]">
-                                        Our next online class commencing date is on {getFullDayFunction(futureDate)},&nbsp;
-                                        <br className={`md:hidden block`}/>
+                                        leading-[13px] xs:tracking-[0px] -tracking-[1px]">
+                                        Our next online class commencing
+                                        <br className={`xs:hidden block`}/>
+                                        date is on {getFullDayFunction(futureDate)},&nbsp;
                                         the {getdateNumber(futureDate)}th 
                                         of {getFullMonthFunction(futureDate)}, {getYear(futureDate)}&nbsp;
                                     </div>
