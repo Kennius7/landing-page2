@@ -35,7 +35,8 @@ const Home = () => {
                                     xs:w-[30px] xs:h-[30px] w-[24px] h-[24px] rounded-[50%]" 
                             />
                             <div className="font-poppins font-semibold text-start md:text-[18px] sm:text-[20px] 
-                                xs:text-[16px] text-[13px] sm:pl-[10px] pl-[6px]">
+                                xs:text-[16px] text-[13px] sm:pl-[10px] pl-[6px] xs:tracking-[0px] 
+                                -tracking-[1px]">
                                 Shosan Code Hub
                             </div>
                         </div>
@@ -53,9 +54,10 @@ const Home = () => {
                                 :   <div className="font-sans font-semibold text-end md:text-[18px] 
                                         sm:text-[17px] xs:text-[13px] text-[11px] text-slate-800 
                                         italic sm:leading-normal xs:leading-[16px] 
-                                        leading-[13px]">
-                                        Our next online class commencing date is on {getFullDayFunction(futureDate)},&nbsp;
-                                        <br className={`md:hidden block`}/>
+                                        leading-[13px] xs:tracking-[0px] -tracking-[1px]">
+                                        Our next online class commencing
+                                        <br className="xs:hidden block"/>
+                                        date is on {getFullDayFunction(futureDate)},&nbsp;
                                         the {getdateNumber(futureDate)}th 
                                         of {getFullMonthFunction(futureDate)}, {getYear(futureDate)}&nbsp;
                                     </div>
@@ -74,7 +76,7 @@ const Home = () => {
                             </div>
                         </div>
 
-                        <div className="flex justify-center items-center w-full sm:mt-0 xs:mt-[20px] mt-[25px]">
+                        <div className="flex justify-center items-center w-full sm:mt-0 xs:mt-[20px] mt-[15px]">
 
                             <div className="flex justify-around items-center sm:w-[70%] xs:w-[80%] w-[90%]">
 

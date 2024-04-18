@@ -241,14 +241,15 @@ function Register() {
                 <div className="w-full">
                     <RegisterHome/>
                 </div>
-                <div className="flex flex-col justify-center items-center md:w-[35%] sm:w-[45%] 
-                    xs:w-[65%] w-[86%] md:mt-[60px] sm:mt-[40px] xs:mt-[20px] mt-[15px]">
-                    <div className="font-poppins font-semibold w-full text-center xs:text-[30px] text-[24px] 
-                        sm:mb-[50px] xs:mb-[35px] mb-[50px] m-4">
+                <div className="flex flex-col justify-center xs:items-center items-start md:w-[35%] sm:w-[45%] 
+                    xs:w-[65%] w-[90%] md:mt-[60px] sm:mt-[40px] xs:mt-[20px] mt-[30px]">
+                    <div className="font-poppins font-semibold xs:w-full w-[80%] xs:text-center 
+                        text-start xs:text-[30px] text-[24px] sm:mb-[50px] xs:mb-[35px] 
+                        mb-[25px] xs:m-4 m-0">
                         REGISTRATION
                     </div>
                     <form 
-                        className="w-full" 
+                        className="xs:w-full w-[95%]" 
                         onSubmit={handleSubmit}>
 
                         <div className="w-full md:mb-[30px] sm:mb-[35px] xs:mb-[20px] mb-[18px]">
