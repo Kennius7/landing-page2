@@ -17,7 +17,7 @@ const Home = () => {
 
     return (
         <>
-            <div className="w-full relative md:h-[380px] sm:h-[600px] xs:h-[400px] h-[300px]">
+            <div className="w-full relative md:h-[380px] sm:h-[450px] xs:h-[370px] h-[300px]">
                 <div className="w-full h-full">
                     <img src={backgroundPics} className="w-full h-full object-cover opacity-40" />
                 </div>
@@ -46,7 +46,9 @@ const Home = () => {
                                         sm:text-[17px] xs:text-[13px] text-[11px] text-slate-800 
                                         italic sm:leading-normal xs:leading-[16px] 
                                         leading-[13px]">
-                                        Our next online class commencing date will be communicated soon.
+                                        Our next online class commencing
+                                        <br className="sm:hidden block"/>
+                                        &nbsp;date will be communicated soon.
                                     </div> 
                                 :   <div className="font-sans font-semibold text-end md:text-[18px] 
                                         sm:text-[17px] xs:text-[13px] text-[11px] text-slate-800 
@@ -64,15 +66,15 @@ const Home = () => {
                     <div className="w-full flex flex-col justify-center items-center">
 
                         <div className="w-full flex flex-col justify-center items-center 
-                            md:mb-[2%] sm:mb-[6%] xs:mb-[20%] mb-[30%]">
-                            <div className="font-poppins font-semibold text-center md:text-[40px] 
+                            md:mb-[2%] sm:mb-[6%] xs:mb-[3%] mb-[2%]">
+                            <div className="font-poppins font-semibold text-center md:text-[40px] text-slate-800
                                 sm:text-[35px] xs:text-[26px] text-[22px] md:max-w-[800px] sm:max-w-[600px] 
-                                xs:max-w-[400px] max-w-[320px] md:mb-[1%] xs:mb-[3%] mb-[12%]">
+                                xs:max-w-[400px] max-w-[320px] md:mb-[1%] xs:mb-[3%] mb-[4%]">
                                 Choose your programming journey 
                             </div>
                         </div>
 
-                        <div className="flex justify-center items-center w-full sm:mt-0 xs:-mt-[30px] -mt-[30%]">
+                        <div className="flex justify-center items-center w-full sm:mt-0 xs:mt-[20px] mt-[25px]">
 
                             <div className="flex justify-around items-center sm:w-[70%] xs:w-[80%] w-[90%]">
 

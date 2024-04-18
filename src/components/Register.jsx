@@ -55,7 +55,7 @@ function Register() {
             setTimeout(() => {
                 fetchRegData();
                 console.log(`Reg Data polling...`)
-            }, 3000);
+            }, 30000);
         }
 
         if (regData.length !== 0) {
@@ -236,77 +236,84 @@ function Register() {
 
     return (
         <>
-            <div className="flex flex-col justify-start items-center w-full h-[1100px]">
+            <div className="flex flex-col justify-start items-center w-full md:h-[1100px] sm:h-[1400px] 
+                xs:h-[950px] h-[930px] bg-slate-200">
                 <div className="w-full">
                     <RegisterHome/>
                 </div>
-                <div className="w-[35%] mt-[60px]">
-                    <div className="font-poppins font-semibold w-full text-center text-[30px] 
-                        mb-[50px] m-4">
+                <div className="flex flex-col justify-center items-center md:w-[35%] sm:w-[45%] 
+                    xs:w-[65%] w-[86%] md:mt-[60px] sm:mt-[40px] xs:mt-[20px] mt-[15px]">
+                    <div className="font-poppins font-semibold w-full text-center xs:text-[30px] text-[24px] 
+                        sm:mb-[50px] xs:mb-[35px] mb-[50px] m-4">
                         REGISTRATION
                     </div>
                     <form 
                         className="w-full" 
                         onSubmit={handleSubmit}>
 
-                        <div className="w-full mb-[30px]">
+                        <div className="w-full md:mb-[30px] sm:mb-[35px] xs:mb-[20px] mb-[18px]">
                             <label 
                                 htmlFor="name" 
-                                className="text-gray-700 text-[16px] font-semibold">
+                                className="text-gray-700 md:text-[16px] sm:text-[15px] text-[14px] 
+                                font-semibold">
                                 Name
                             </label>
-                            <div className="w-full h-[50px]">
+                            <div className="w-full md:h-[50px] sm:h-[55px] xs:h-[40px] h-[45px]">
                                 <input type="text" id="name" name="name" 
                                     placeholder="Eg. John Doe"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className={`font-sans text-[16px] w-full h-[85%] pl-2 
-                                    border rounded-[6px] placeholder:italic placeholder:text-[16px]
+                                    className={`font-sans md:text-[16px] sm:text-[15px] text-[16px] 
+                                    w-full h-[85%] pl-2 border rounded-[6px] placeholder:italic 
+                                    placeholder:text-[16px]
                                     ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
                                 />
                                 {
                                     errors.name 
-                                        &&  <p className="font-sans text-red-500 text-[15px] italic 
-                                            w-full h-[15%] pl-1">
+                                        &&  <p className="font-sans text-red-500 sm:text-[15px] 
+                                            xs:text-[13px] text-[12px] italic w-full h-[15%] pl-1">
                                                 {errors.name}
                                             </p>
                                 }
                             </div>
                         </div>
 
-                        <div className="w-full mb-[30px]">
+                        <div className="w-full md:mb-[30px] sm:mb-[35px] xs:mb-[20px] mb-[18px]">
                             <label 
                                 htmlFor="email" 
-                                className="text-gray-700 text-[16px] font-semibold">
+                                className="text-gray-700 md:text-[16px] sm:text-[15px] text-[14px] 
+                                font-semibold">
                                 Email
                             </label>
-                            <div className="w-full h-[50px]">
+                            <div className="w-full md:h-[50px] sm:h-[55px] xs:h-[40px] h-[45px]">
                                 <input type="text" id="email" name="email"
                                     placeholder="Eg. johndoe@email.com"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className={`font-sans text-[16px] w-full h-[85%] pl-2 
-                                    border rounded-[6px] placeholder:italic placeholder:text-[16px]
+                                    className={`font-sans md:text-[16px] sm:text-[15px] text-[16px] 
+                                    w-full h-[85%] pl-2 border rounded-[6px] placeholder:italic 
+                                    placeholder:text-[16px]
                                     ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
                                 />
                                 {
                                     errors.email 
                                         && 
-                                        <p className="font-sans text-red-500 text-[15px] italic 
-                                        w-full h-[15%] pl-1">
+                                        <p className="font-sans text-red-500 sm:text-[15px] 
+                                            xs:text-[13px] text-[12px] italic w-full h-[15%] pl-1">
                                             {errors.email}
                                         </p>
                                 }
                             </div>
                         </div>
 
-                        <div className="w-full mb-[30px]">
+                        <div className="w-full md:mb-[30px] sm:mb-[35px] xs:mb-[20px] mb-[18px]">
                             <label 
                                 htmlFor="number" 
-                                className="text-gray-700 text-[16px] font-semibold">
+                                className="text-gray-700 md:text-[16px] sm:text-[15px] text-[14px] 
+                                font-semibold">
                                 Phone Number
                             </label>
-                            <div className="w-full h-[50px]">
+                            <div className="w-full md:h-[50px] sm:h-[55px] xs:h-[40px] h-[45px]">
                                 <PhoneInput
                                     defaultCountry="ng"
                                     type="number"
@@ -318,8 +325,9 @@ function Register() {
                                     }}
                                     value={formData.number}
                                     onChange={handleNumberChange} 
-                                    className={`outline-none rounded-[6px] border font-sans 
-                                    text-[16px] w-full h-[85%] placeholder:italic placeholder:text-[16px]
+                                    className={`outline-none rounded-[6px] border font-sans md:text-[16px] 
+                                    sm:text-[15px] text-[16px] w-full h-[85%] placeholder:italic 
+                                    placeholder:text-[16px]
                                     ${errors.number ? 'border-red-500' : 'border-gray-300'}`}
                                     inputStyle={{
                                         width: "100%", 
@@ -332,27 +340,28 @@ function Register() {
                                 {
                                     errors.number 
                                         && 
-                                        <p className="font-sans text-red-500 text-[15px] italic 
-                                        w-full h-[15%] pl-1">
+                                        <p className="font-sans text-red-500 sm:text-[15px] 
+                                            xs:text-[13px] text-[12px] italic w-full h-[15%] pl-1">
                                             {errors.number}
                                         </p>
                                 }
                             </div>
                         </div>
 
-                        <div className="w-full mb-[30px]">
+                        <div className="w-full md:mb-[30px] sm:mb-[35px] xs:mb-[20px] mb-[18px]">
                             <label 
                                 htmlFor="courses" 
-                                className="text-gray-700 text-[16px] font-semibold">
+                                className="text-gray-700 md:text-[16px] sm:text-[15px] text-[14px] 
+                                font-semibold">
                                 Select a course
                             </label>
-                            <div className="w-full h-[50px]">
+                            <div className="w-full md:h-[50px] sm:h-[55px] xs:h-[40px] h-[45px]">
                                 <select
                                     name="courses"
                                     value={formData.courses}
                                     onChange={handleChange}
-                                    className={`font-sans text-[18px] italic w-full h-[85%] pl-2 
-                                    border rounded-[6px] text-slate-600
+                                    className={`font-sans md:text-[16px] sm:text-[15px] text-[16px] 
+                                    italic w-full h-[85%] pl-2 border rounded-[6px] text-slate-600
                                         ${errors.courses ? 'border-red-500' : 'border-gray-300'}`}
                                 >
                                     {selectCourses.map(course => (
@@ -366,8 +375,8 @@ function Register() {
                                 </select>
                                 {
                                     errors.courses 
-                                        && <p className="font-sans text-red-500 text-[15px] italic 
-                                            w-full h-[15%] pl-1">
+                                        && <p className="font-sans text-red-500 sm:text-[15px] 
+                                            xs:text-[13px] text-[12px] italic w-full h-[15%] pl-1">
                                                 {errors.courses}
                                             </p>
                                 }
