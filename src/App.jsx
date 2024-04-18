@@ -3,7 +3,7 @@ import { mainContext } from "./context/mainContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./ScrollToTop";
 import { monthFunct, dayFunct, hourFunct, minuteFunct, secFunct } from "./data";
-import { LandingPage, Register, Dashboard, PaymentPage, UserBoard, Login, SignUp } from "./components";
+import { LandingPage, Register, Dashboard } from "./components";
 import axios from "axios";
 
 
@@ -135,10 +135,6 @@ function App() {
             <Route path="/" element={ <LandingPage /> } />
             <Route path="/register" element={ <Register /> } />
             <Route path="/dashboard" element={ <Dashboard /> } />
-            <Route path="/payment" element={ <PaymentPage /> } />
-            <Route path="/userboard" element={ <UserBoard /> } />
-            <Route path="/login" element={ <Login /> } />
-            <Route path="/signup" element={ <SignUp /> } />
           </Routes>
         </BrowserRouter>
       </mainContext.Provider>
