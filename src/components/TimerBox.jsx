@@ -18,7 +18,7 @@ export const TimerBox = ({ timeLimit, timeSegment }) => {
                 :   <span className="font-poppins font-semibold 
                         text-white text-center sm:text-[40px] 
                         xs:text-[24px] text-[25px]">
-                        {timeSegment}
+                        {timeSegment || "0"}
                     </span>
             }
         </>

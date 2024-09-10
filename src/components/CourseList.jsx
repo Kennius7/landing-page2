@@ -6,7 +6,7 @@ function CourseList() {
     return (
         <>
             <div className="flex flex-col md:justify-center justify-start items-center 
-                bg-slate-50 w-full md:h-[1200px] sm:h-[1400px] xs:h-[1400px] h-[1480px]">
+                bg-slate-100 w-full md:h-[1200px] sm:h-[1200px] xs:h-[1250px] h-[1200px]">
 
                 <div className="font-poppins font-semibold text-start text-slate-700 sm:w-[95%] 
                     xs:w-[80%] w-[88%] sm:text-[30px] xs:text-[25px] text-[18px] sm:mb-[20px] 
@@ -74,7 +74,7 @@ function CourseList() {
                                     {course.id + 1}
                                 </td>
                                 <td className="text-start md:text-[20px] sm:text-[16px] xs:text-[13px] text-[11px] 
-                                    xs:w-[50%] w-[52%]">
+                                    xs:w-[50%] w-[48%]">
                                     {course.name}
                                 </td>
                                 <td className="font-mono text-start md:text-[20px] sm:text-[16px] xs:text-[14px] 
@@ -86,7 +86,7 @@ function CourseList() {
                                     N{course.price}
                                 </td>
                                 <td className="font-poppins text-start md:text-[20px] sm:text-[16px] 
-                                    xs:text-[13px] text-[10px] xs:w-[15%] w-[12%]">
+                                    xs:text-[13px] text-[10px] xs:w-[15%] w-[16%]">
                                     {course.duration}
                                 </td>
                             </tr>

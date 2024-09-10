@@ -50,9 +50,9 @@ const Home = () => {
                                         sm:text-[17px] xs:text-[13px] text-[11px] text-slate-800 
                                         italic sm:leading-normal xs:leading-[16px] 
                                         leading-[13px] xs:tracking-[0px] -tracking-[1px]">
-                                        Our next online class commencing
-                                        <br className={`xs:hidden block`}/>
-                                        date is on {getFullDayFunction(futureDate)},&nbsp;
+                                        Our next online class commencing&nbsp; 
+                                        <br className={`xs:hidden block`}/> 
+                                        date is on {getFullDayFunction(futureDate)}, 
                                         the {getdateNumber(futureDate)}th 
                                         of {getFullMonthFunction(futureDate)}, {getYear(futureDate)}&nbsp;
                                     </div>
